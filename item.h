@@ -17,7 +17,7 @@ private:
     BonusType type_;
     int quantity_;
     std::function<int(void)> priceFunction_;
-    std::list<Upgrade &> upgrades_;
+    Upgrade * pupgrade_;
 
 public:
     QString & getName();
@@ -31,9 +31,8 @@ public:
     void Unlock();
     void AddQuantity(int = 1);
     void RemoveQuantity(int = 1);
-    void AddUpgrade(Upgrade & upgrade);
 
-    Item(const QString &, const QString &, const int, const BonusType,const std::function<int(void)>);
+    Item(const QString &, const QString &, const int, const BonusType,const std::function<int(void)>,Upgrade * pupgrade);
 };
 
 #endif // ITEM_H

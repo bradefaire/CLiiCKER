@@ -1,15 +1,16 @@
 #include "item.h"
 
-Item::Item(const QString & name, const QString & description, const int bonus, const BonusType type,const std::function<int(void)> priceFunction) {
+Item::Item(const QString & name, const QString & description, const int bonus, const BonusType type,const std::function<int(void)> priceFunction, Upgrade * pupgrade) {
     name_ = name;
     description_ = description;
     bonus_ = bonus;
     type_ = type;
     priceFunction_ = priceFunction;
 
+    pupgrade_ = pupgrade;
+
     quantity_ = 0;
     unlocked_ = false;
-    upgrades_ = new std::list<Upgrade &>();
 }
 
 int Item::getBonus() const{
@@ -59,8 +60,4 @@ void Item::RemoveQuantity(int quantity){
         throw "Unvalid Argument : removed quantity should be less than available quantity";
     }
     quantity_ -= quantity;
-}
-
-void Item::AddUpgrade(Upgrade & upgrade){
-    upgrades_.push_back(upgrade);
 }

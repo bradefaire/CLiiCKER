@@ -46,7 +46,3 @@ void Upgrade::AddLevel(int levelAmount) {
     }
     level_ += levelAmount;
 }
-
-void Upgrade::operator=(const Upgrade & original){
-    this = new Upgrade(original.getName(),original.getDescription(),original.getBonus(),original.Price);
-}
