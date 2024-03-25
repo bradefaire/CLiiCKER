@@ -7,7 +7,8 @@
 
 class Item
 {
-enum BonusType {UNITS_PER_CLICK, UNITS_PER_SECOND};
+public:
+    enum BonusType{UNITS_PER_CLICK, UNITS_PER_SECOND};
 
 private:
     QString name_;
@@ -27,6 +28,8 @@ public:
     BonusType getType() const;
     int getQuantity() const;
     int Price() const;
+
+    Upgrade * getUpgrade();
 
     void Unlock();
     void AddQuantity(int = 1);

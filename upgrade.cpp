@@ -7,9 +7,6 @@ Upgrade::Upgrade(const QString & name, const QString & description, const int bo
     name_ = name;
     bonus_ = bonus;
     priceFunction_ = priceFunction;
-
-    level_ = 0;
-
 }
 
 bool Upgrade::isUnlocked() const {
@@ -28,21 +25,10 @@ int Upgrade::getBonus() const {
     return bonus_;
 }
 
-int Upgrade::getLevel() const {
-    return level_;
-}
-
 void Upgrade::Unlock(){
     unlocked_ = true;
 }
 
 int Upgrade::Price() const {
     return priceFunction_();
-}
-
-void Upgrade::AddLevel(int levelAmount) {
-    if (levelAmount < 0){
-        throw "Unvalid Argument, levelAmount should be positive";
-    }
-    level_ += levelAmount;
 }

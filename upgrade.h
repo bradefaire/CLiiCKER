@@ -10,7 +10,6 @@ private:
     QString description_;
     QString name_;
     int bonus_;
-    int level_;
     std::function<int(void)> priceFunction_;
 
 public:
@@ -19,10 +18,8 @@ public:
     QString & getDescription();
     QString & getName();
     int getBonus() const;
-    int getLevel() const;
 
     void Unlock();
-    void AddLevel(int = 1);
 
     void operator=(const Upgrade &);
 

@@ -61,3 +61,7 @@ void Item::RemoveQuantity(int quantity){
     }
     quantity_ -= quantity;
 }
+
+Upgrade * Item::getUpgrade(){
+    return pupgrade_;
+}
