@@ -1,6 +1,6 @@
 #include "item.h"
 
-Item::Item(const QString & name, const QString & description, const int bonus, const BonusType type,const std::function<int(void)> priceFunction, Upgrade * pupgrade) {
+Item::Item(const QString & name, const QString & description, const int bonus, const BonusType type,const std::function<int(const int)> priceFunction, Upgrade * pupgrade) {
     name_ = name;
     description_ = description;
     bonus_ = bonus;
@@ -38,7 +38,7 @@ bool Item::isUnlocked() const {
 }
 
 int Item::Price() const {
-    return priceFunction_();
+    return priceFunction_(quantity_);
 }
 
 void Item::Unlock() {

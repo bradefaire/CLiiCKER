@@ -32,7 +32,11 @@
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_8">
         <item>
-         <widget class="QLineEdit" name="lineEdit"/>
+         <widget class="QLineEdit" name="lineEdit">
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
         </item>
         <item>
          <widget class="QLabel" name="label_4">
@@ -264,7 +268,7 @@
 color: rgb(0, 0, 0);</string>
           </property>
           <property name="text">
-           <string>New Window</string>
+           <string>New Tab</string>
           </property>
          </widget>
         </item>
@@ -315,7 +319,7 @@ color: rgb(0, 0, 0);</string>
     <item row="0" column="1">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tab">
        <attribute name="title">
@@ -350,7 +354,7 @@ color: rgb(0, 0, 0);</string>
      <x>0</x>
      <y>0</y>
      <width>875</width>
-     <height>25</height>
+     <height>17</height>
     </rect>
    </property>
    <property name="nativeMenuBar">

@@ -26,6 +26,7 @@ void Tab::AddItem(Item * pitem){
     int value;
     try {
         value = items_.at(pitem) + 1;
+        pitem->AddQuantity();
         Upgrade * pupgrade = pitem->getUpgrade();
         int bonus = pitem->getBonus() + upgrades_.at(pupgrade) * pupgrade->getBonus();
         if (pitem->getType() == Item::BonusType::UNITS_PER_CLICK)
