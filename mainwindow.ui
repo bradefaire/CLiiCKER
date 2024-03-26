@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>875</width>
-    <height>500</height>
+    <height>521</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -30,7 +30,18 @@
        <enum>QLayout::SetDefaultConstraint</enum>
       </property>
       <item>
-       <widget class="QLineEdit" name="lineEdit"/>
+       <layout class="QHBoxLayout" name="horizontalLayout_8">
+        <item>
+         <widget class="QLineEdit" name="lineEdit"/>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_4">
+          <property name="text">
+           <string>IImage</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </item>
       <item>
        <widget class="QGroupBox" name="groupBox_2">
@@ -43,43 +54,13 @@
         <layout class="QGridLayout" name="gridLayout_4">
          <item row="0" column="0">
           <layout class="QGridLayout" name="gridLayout_2">
-           <item row="1" column="1">
-            <widget class="QPushButton" name="pushButton_4">
-             <property name="styleSheet">
-              <string notr="true">background-color: rgb(255, 255, 255);</string>
-             </property>
-             <property name="text">
-              <string>Améliorer</string>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="1">
-            <widget class="QWidget" name="widget_4" native="true">
-             <layout class="QHBoxLayout" name="horizontalLayout_4">
-              <item>
-               <widget class="QLabel" name="label_12">
-                <property name="text">
-                 <string>Nombre:</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLabel" name="number_7">
-                <property name="text">
-                 <string>56</string>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </widget>
-           </item>
            <item row="3" column="0">
             <widget class="QWidget" name="widget_5" native="true">
              <layout class="QHBoxLayout" name="horizontalLayout_5">
               <item>
                <widget class="QLabel" name="label_5">
                 <property name="text">
-                 <string>Coût:</string>
+                 <string>Price :</string>
                 </property>
                </widget>
               </item>
@@ -93,20 +74,23 @@
              </layout>
             </widget>
            </item>
+           <item row="2" column="1">
+            <widget class="QLabel" name="label_13">
+             <property name="text">
+              <string>Image</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
            <item row="1" column="0">
             <widget class="QPushButton" name="pushButton_5">
              <property name="styleSheet">
               <string notr="true">background-color: rgb(255, 255, 255);</string>
              </property>
              <property name="text">
-              <string>Acheter</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="1">
-            <widget class="QLabel" name="label_13">
-             <property name="text">
-              <string>Image</string>
+              <string>Buy</string>
              </property>
             </widget>
            </item>
@@ -116,12 +100,42 @@
               <item>
                <widget class="QLabel" name="label_14">
                 <property name="text">
-                 <string>Niveau:</string>
+                 <string>Level :</string>
                 </property>
                </widget>
               </item>
               <item>
                <widget class="QLabel" name="number_9">
+                <property name="text">
+                 <string>56</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QPushButton" name="pushButton_4">
+             <property name="styleSheet">
+              <string notr="true">background-color: rgb(255, 255, 255);</string>
+             </property>
+             <property name="text">
+              <string>Upgrade</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="1">
+            <widget class="QWidget" name="widget_4" native="true">
+             <layout class="QHBoxLayout" name="horizontalLayout_4">
+              <item>
+               <widget class="QLabel" name="label_12">
+                <property name="text">
+                 <string>Quantity :</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="number_7">
                 <property name="text">
                  <string>56</string>
                 </property>
@@ -144,15 +158,45 @@
          <string>Item1</string>
         </property>
         <layout class="QGridLayout" name="gridLayout_3">
-         <item row="0" column="0">
+         <item row="1" column="0">
           <layout class="QGridLayout" name="gridLayout">
+           <item row="2" column="1">
+            <widget class="QLabel" name="label_15">
+             <property name="text">
+              <string>Image</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QWidget" name="widget_3" native="true">
+             <layout class="QHBoxLayout" name="horizontalLayout_3">
+              <item>
+               <widget class="QLabel" name="label_10">
+                <property name="text">
+                 <string>Level :</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="number_6">
+                <property name="text">
+                 <string>56</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
            <item row="1" column="1">
             <widget class="QPushButton" name="pushButton_3">
              <property name="styleSheet">
               <string notr="true">background-color: rgb(255, 255, 255);</string>
              </property>
              <property name="text">
-              <string>Améliorer</string>
+              <string>Upgrade</string>
              </property>
             </widget>
            </item>
@@ -162,32 +206,12 @@
               <item>
                <widget class="QLabel" name="label_9">
                 <property name="text">
-                 <string>Nombre:</string>
+                 <string>Quantity :</string>
                 </property>
                </widget>
               </item>
               <item>
                <widget class="QLabel" name="number_5">
-                <property name="text">
-                 <string>56</string>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </widget>
-           </item>
-           <item row="3" column="0">
-            <widget class="QWidget" name="widget" native="true">
-             <layout class="QHBoxLayout" name="horizontalLayout">
-              <item>
-               <widget class="QLabel" name="label">
-                <property name="text">
-                 <string>Coût:</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLabel" name="number">
                 <property name="text">
                  <string>56</string>
                 </property>
@@ -202,29 +226,22 @@
               <string notr="true">background-color: rgb(255, 255, 255);</string>
              </property>
              <property name="text">
-              <string>Acheter</string>
+              <string>Buy</string>
              </property>
             </widget>
            </item>
-           <item row="2" column="1">
-            <widget class="QLabel" name="label_11">
-             <property name="text">
-              <string>Image</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="0">
-            <widget class="QWidget" name="widget_3" native="true">
-             <layout class="QHBoxLayout" name="horizontalLayout_3">
+           <item row="3" column="0">
+            <widget class="QWidget" name="widget" native="true">
+             <layout class="QHBoxLayout" name="horizontalLayout">
               <item>
-               <widget class="QLabel" name="label_10">
+               <widget class="QLabel" name="label">
                 <property name="text">
-                 <string>Niveau:</string>
+                 <string>Price :</string>
                 </property>
                </widget>
               </item>
               <item>
-               <widget class="QLabel" name="number_6">
+               <widget class="QLabel" name="number">
                 <property name="text">
                  <string>56</string>
                 </property>
@@ -238,12 +255,67 @@
         </layout>
        </widget>
       </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_7">
+        <item>
+         <widget class="QPushButton" name="pushButton_6">
+          <property name="styleSheet">
+           <string notr="true">background-color: rgb(255, 255, 255);
+color: rgb(0, 0, 0);</string>
+          </property>
+          <property name="text">
+           <string>New Window</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_2">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+            <horstretch>12</horstretch>
+            <verstretch>13</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="sizeIncrement">
+           <size>
+            <width>0</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="baseSize">
+           <size>
+            <width>0</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>Price :</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_3">
+          <property name="text">
+           <string>56</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
      </layout>
     </item>
     <item row="0" column="1">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="tab">
        <attribute name="title">
@@ -259,7 +331,7 @@
          </rect>
         </property>
         <property name="text">
-         <string>PushButton</string>
+         <string>Push Me</string>
         </property>
        </widget>
       </widget>
