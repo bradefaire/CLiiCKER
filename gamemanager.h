@@ -15,9 +15,9 @@ private:
 
 public:
     GameManager();
-    void BuyItem(const int);//Item index
-    void BuyUpgrade(const int);//Upgrade index
-    void BuyTab();
+    bool BuyItem(const QString & itemName);
+    bool BuyUpgrade(const QString & upgradeName);
+    bool BuyTab();
 };
 
 #endif // GAMEMANAGER_H

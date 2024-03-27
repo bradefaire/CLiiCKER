@@ -21,8 +21,8 @@ public:
 
 public slots:
     void ButtonPressed();
-    void BuyItem(const int);//Item index
-    void BuyUpgrade(const int);//Upgrade index
+    void BuyItem(const QString & itemName);
+    void BuyUpgrade(const QString & upgradeName);
     void BuyTab();
     void TabChanged(const int);//Tab index
 

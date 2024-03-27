@@ -15,14 +15,31 @@ GameManager::GameManager() {
 
 }
 
-void GameManager::BuyItem(const int itemIndex){
-    return;
+bool GameManager::BuyItem(const QString & itemName){
+    Item * pitem = pplayer_->getCurrentWindow()->getItem(itemName);
+    int price = pitem->Price();
+    if (price > pplayer_->getScore()){
+        return false;
+    }
+    int addedUPS = pplayer_->getCurrentWindow()->AddItem(pitem);
+    pplayer_->removeScore(price);
+    pplayer_->addUnitsPerSecond(addedUPS);
+    return true;
 }
 
-void GameManager::BuyUpgrade(const int upgradeIndex){
-    return;
+bool GameManager::BuyUpgrade(const QString & upgradeName){
+    Tab * currentWindow = pplayer_->getCurrentWindow();
+    Upgrade * pupgrade = currentWindow->getUpgrade(upgradeName);
+    int price = pupgrade->Price(currentWindow->getUpgradeLevel(pupgrade));
+    if (price > pplayer_->getScore()){
+        return false;
+    }
+    int addedUPS = currentWindow->AddUpgrade(pupgrade);
+    pplayer_->removeScore(price);
+    pplayer_->addUnitsPerSecond(addedUPS);
+    return true;
 }
 
-void GameManager::BuyTab(){
-    return;
+bool GameManager::BuyTab(){
+    return false;
 }

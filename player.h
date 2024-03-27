@@ -2,33 +2,34 @@
 #define PLAYER_H
 
 #include <QString>
+#include <vector>
 
 #include "stats.h"
-
-struct Window{
-    int unitsPerSecond;
-    Window(){
-        unitsPerSecond = 2;
-    }
-};
+#include "tab.h"
 
 class Player
 {
 public:
     Player(); //copy
-    Player(QString name, int score, int unitPerSecond, int nbWindow , std::vector<Window> ListWindow);//Value
+    //Player(QString name, int score, int unitPerSecond, int nbWindow , std::vector<Tab *> ListWindow);//Value
 private:
     QString name;
     int score;
     int unitPerSecond;
     int nbWindow;
-    std::vector<Window> listWindow;
+    std::vector<Tab *> listWindow;
+    int currentWindowIndex;
     Stats statPlayer;
 public :
-    void addScore(const int & score);
-    void addUnitPerSecond(const int & score);
+    void addScore(const int score);
+    void removeScore(const int score);
+    int getScore();
+    void addUnitsPerSecond(const int score);
     int getWindowPrice(int nbWindow);
-    int addListWindow(const Window & window);
+    int addListWindow(Tab * tab);
+    Tab * getCurrentWindow();
+    void setCurrentWindowIndex(const int newIndex);
+
 };
 
 

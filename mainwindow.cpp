@@ -15,12 +15,12 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::BuyItem(const int itemIndex){
-    pGameManager_->BuyItem(itemIndex);
+void MainWindow::BuyItem(const QString & itemName){
+    pGameManager_->BuyItem(itemName);
 }
 
-void MainWindow::BuyUpgrade(const int upgradeIndex){
-    pGameManager_->BuyUpgrade(upgradeIndex);
+void MainWindow::BuyUpgrade(const QString & upgradeName){
+    pGameManager_->BuyUpgrade(upgradeName);
 }
 
 void MainWindow::BuyTab(){

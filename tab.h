@@ -21,9 +21,12 @@ public:
     QString & getName();
     int getUPS();
     int getUPC();
+    Upgrade * getUpgrade(const QString & itemName);
+    Item * getItem(const QString & upgradeName);
+    int getUpgradeLevel(Upgrade * pupgrade);
 
-    void AddItem(Item * pitem);
-    void AddUpgrade(Upgrade * pupgrade);
+    int AddItem(Item * pitem);//return the amount of UPS gained
+    int AddUpgrade(Upgrade * pupgrade);//return the amount of UPS gained
 
     Tab(QString & name, int UPS, int UPC);
 };
