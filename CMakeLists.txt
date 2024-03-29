@@ -27,6 +27,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         item.h item.cpp
         tab.h tab.cpp
         player.h player.cpp
+        gamemanager.h gamemanager.cpp
         stats.h stats.cpp
     )
 # Define target properties for Android with Qt 6 as:

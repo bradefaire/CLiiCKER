@@ -1,6 +1,6 @@
 #include "upgrade.h"
 
-Upgrade::Upgrade(const QString & name, const QString & description, const int bonus, const std::function<int(void)> priceFunction){
+Upgrade::Upgrade(const QString & name, const QString & description, const int bonus, const std::function<int(const int)> priceFunction){
 
     unlocked_ = false;
     description_ = description;
@@ -29,6 +29,6 @@ void Upgrade::Unlock(){
     unlocked_ = true;
 }
 
-int Upgrade::Price() const {
-    return priceFunction_();
+int Upgrade::Price(const int currentLevel) const {
+    return priceFunction_(currentLevel);
 }

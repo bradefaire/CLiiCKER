@@ -10,10 +10,10 @@ private:
     QString description_;
     QString name_;
     int bonus_;
-    std::function<int(void)> priceFunction_;
+    std::function<int(const int)> priceFunction_;
 
 public:
-    int Price() const;
+    int Price(const int) const;
     bool isUnlocked() const;
     QString & getDescription();
     QString & getName();
@@ -23,7 +23,7 @@ public:
 
     void operator=(const Upgrade &);
 
-    Upgrade(const QString &, const QString &, const int, const std::function<int(void)>);
+    Upgrade(const QString &, const QString &, const int, const std::function<int(const int)>);
 };
 
 #endif // UPGRADE_H
