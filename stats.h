@@ -8,7 +8,12 @@ class Stats
 {
 public:
     Stats();
-    Stats(int totalCicks, int totalEarned);
+    Stats(int totalCicks,
+          int totalEarned,
+          int totalSpent,
+          QTime totalTime,
+          QDateTime startDate
+          );
 private:
     int totalCicks;
     int totalEarned;
