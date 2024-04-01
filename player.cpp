@@ -2,7 +2,30 @@
 
 #include <stdexcept>
 
-Player::Player() {}
+Player::Player() {
+    name = "New Game";
+    score = 0;
+    unitPerSecond = 0;
+    nbWindow = 0;
+    listWindow = std::vector<Tab *>();
+}
+
+Player::Player(QString Name) {
+    name = Name;
+    score = 0;
+    unitPerSecond = 0;
+    nbWindow = 0;
+    listWindow = std::vector<Tab *>();
+}
+
+Player::Player(QString Name, int _score, int _unitPerSecond, int _nbWindow, std::vector<Tab *> _ListWindow)
+{
+    name = Name;
+    score = _score;
+    unitPerSecond = _unitPerSecond;
+    nbWindow = _nbWindow;
+    listWindow = _ListWindow;
+}
 
 void Player::addScore(const int addedScore){
     if (!(addedScore > 0)){
