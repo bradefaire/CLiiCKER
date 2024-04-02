@@ -7,7 +7,7 @@ Player::Player() {
     score = 0;
     unitPerSecond = 0;
     nbWindow = 0;
-    currentWindowIndex = -1;
+    currentWindowIndex = 0;
     listWindow = std::vector<Tab *>();
 }
 
@@ -16,7 +16,7 @@ Player::Player(QString Name) {
     score = 0;
     unitPerSecond = 0;
     nbWindow = 0;
-    currentWindowIndex = -1;
+    currentWindowIndex = 0;
     listWindow = std::vector<Tab *>();
 }
 

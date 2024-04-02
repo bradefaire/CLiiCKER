@@ -13,7 +13,11 @@ GameManager::GameManager() {
     upgrades_.push_back(pupgrade0);
     items_.push_back(pitem0);
 
+    Tab * tab1 = new Tab("Hello World",items_,upgrades_);
+
     pplayer_ = new Player();
+
+    pplayer_->addListWindow(tab1);
 
 }
 
