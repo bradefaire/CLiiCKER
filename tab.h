@@ -26,6 +26,8 @@ public:
     Item * getItem(const QString & upgradeName);
     int getUpgradeLevel(Upgrade * pupgrade);
     int getItemQuantity(Item * pitem);
+    std::map<Item *,int> getItems();
+    std::map<Upgrade *,int> getUpgrades();
 
     int AddItem(Item * pitem);//return the amount of UPS gained
     int AddUpgrade(Upgrade * pupgrade);//return the amount of UPS gained

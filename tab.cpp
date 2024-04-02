@@ -108,3 +108,11 @@ int Tab::getUpgradeLevel(Upgrade * pupgrade){
 int Tab::getItemQuantity(Item * pitem){
     return items_.at(pitem);
 }
+
+std::map<Item *,int> Tab::getItems(){
+    return items_;
+}
+
+std::map<Upgrade *,int> Tab::getUpgrades(){
+    return upgrades_;
+}

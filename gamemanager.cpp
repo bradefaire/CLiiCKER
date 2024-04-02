@@ -1,5 +1,7 @@
 #include "gamemanager.h"
 
+#include <QJsonDocument>
+
 GameManager::GameManager() {
 
     upgrades_ = std::vector<Upgrade *>();
@@ -50,4 +52,45 @@ bool GameManager::BuyTab(const QString & newName){
     pplayer_->setCurrentWindowIndex(pplayer_->getNbWindow());
     pplayer_->addListWindow(new Tab(newName,items_,upgrades_));
     return true;
+}
+
+void GameManager::ButtonPressed(){
+    pplayer_->addScore(pplayer_->getCurrentWindow()->getUPC());
+}
+
+void GameManager::Update(const int deltaTime){
+    pplayer_->addScore(pplayer_->getCurrentWindow()->getUPS() * deltaTime);
+}
+
+void GameManager::ChangeTab(const int tabIndex){
+    pplayer_->setCurrentWindowIndex(tabIndex);
+}
+
+void GameManager::SaveGame(){
+    // QJsonObject mainObject;
+    // mainObject.insert("score",QJsonValue(pplayer_->getScore()));
+    // QJsonArray tabsArray;
+    // for (Tab * ptab : pplayer_->getWindows()){
+    //     QJsonObject tabOcject;
+    //     QJsonObject itemsObject;
+    //     QJsonObject upgradesObject;
+    //     for (const auto& [pitem,quantity] : ptab->getItems() ){
+    //         itemsObject.insert(pitem->getName(),quantity);
+    //     }
+    //     for (const auto& [pupgrade,level] : ptab->getUpgrades() ){
+    //         upgradesObject.insert(pupgrade->getName(),level);
+    //     }
+    //     tabOcject.insert("items",itemsObject);
+    //     tabOcject.insert("upgrades",upgradesObject);
+    //     tabsArray.append(ptab->getName(),tabObject);
+    // }
+    // mainObject.insert("tabs",tabsArray);
+}
+
+void GameManager::LoadGame(){
+    return;
+}
+
+void GameManager::NewGame(){
+    return;
 }

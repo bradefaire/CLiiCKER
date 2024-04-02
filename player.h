@@ -35,6 +35,7 @@ public :
     Tab * getCurrentWindow();
     void setCurrentWindowIndex(const int newIndex);
     int getNbWindow();
+    std::vector<Tab *> getWindows();
 
 };
 

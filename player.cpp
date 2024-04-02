@@ -81,3 +81,7 @@ void Player::setCurrentWindowIndex(const int newIndex){
     }
     currentWindowIndex = newIndex;
 }
+
+std::vector<Tab *> Player::getWindows(){
+    return listWindow;
+}
