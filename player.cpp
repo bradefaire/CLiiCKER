@@ -7,6 +7,7 @@ Player::Player() {
     score = 0;
     unitPerSecond = 0;
     nbWindow = 0;
+    currentWindowIndex = -1;
     listWindow = std::vector<Tab *>();
 }
 
@@ -15,6 +16,7 @@ Player::Player(QString Name) {
     score = 0;
     unitPerSecond = 0;
     nbWindow = 0;
+    currentWindowIndex = -1;
     listWindow = std::vector<Tab *>();
 }
 
@@ -25,6 +27,7 @@ Player::Player(QString Name, int _score, int _unitPerSecond, int _nbWindow, std:
     unitPerSecond = _unitPerSecond;
     nbWindow = _nbWindow;
     listWindow = _ListWindow;
+    currentWindowIndex = 0;
 }
 
 void Player::addScore(const int addedScore){
@@ -61,6 +64,10 @@ void Player::addUnitsPerSecond(const int addedScore){
 
 int Player::getWindowPrice(int currentNbWindow){
     return 56;
+}
+
+int Player::getNbWindow(){
+    return nbWindow;
 }
 
 int  Player::addListWindow(Tab * tab){

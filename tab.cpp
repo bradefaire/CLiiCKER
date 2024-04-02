@@ -2,12 +2,22 @@
 
 #include <stdexcept>
 
-Tab::Tab(QString & name, int UPS, int UPC) {
+Tab::Tab(const QString & name, int UPS, int UPC) {
 
     name_ = name;
     unitsPerSecond_ = UPS;
     unitsPerClick_ = UPC;
 
+}
+
+Tab::Tab(const QString & name, std::vector<Item *> items, std::vector<Upgrade *> upgrades){
+    Tab(name,0,0);
+    for (Item * pitem : items){
+        this->AddItem(pitem);
+    }
+    for (Upgrade * pupgrade : upgrades){
+        this->AddUpgrade(pupgrade);
+    }
 }
 
 QString & Tab::getName(){

@@ -2,14 +2,14 @@
 
 GameManager::GameManager() {
 
-    upgrades_ = new Upgrade*[1];
-    items_ = new Item*[1];
+    upgrades_ = std::vector<Upgrade *>();
+    items_ = std::vector<Item *>();
 
     Upgrade * pupgrade0 = new Upgrade(QString("U1"),QString("Increase UPC by 1"),1,[](const int currentLevel) { return currentLevel;});
     Item * pitem0 = new Item(QString("I1"),QString("Increase the UPC by 1"),1,Item::BonusType::UNITS_PER_CLICK,[](int quantity) { return 2*quantity;},pupgrade0);
 
-    upgrades_[0] = pupgrade0;
-    items_[0] = pitem0;
+    upgrades_.push_back(pupgrade0);
+    items_.push_back(pitem0);
 
     pplayer_ = new Player();
 
@@ -40,6 +40,13 @@ bool GameManager::BuyUpgrade(const QString & upgradeName){
     return true;
 }
 
-bool GameManager::BuyTab(){
-    return false;
+bool GameManager::BuyTab(const QString & newName){
+    int price = pplayer_->getWindowPrice(pplayer_->getNbWindow());
+    if (price > pplayer_->getScore()){
+        return false;
+    }
+    pplayer_->removeScore(price);
+    pplayer_->setCurrentWindowIndex(pplayer_->getNbWindow());
+    pplayer_->addListWindow(new Tab(newName,items_,upgrades_));
+    return true;
 }

@@ -34,6 +34,7 @@ public :
     int addListWindow(Tab * tab);
     Tab * getCurrentWindow();
     void setCurrentWindowIndex(const int newIndex);
+    int getNbWindow();
 
 };
 
