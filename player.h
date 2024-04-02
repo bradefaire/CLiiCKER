@@ -36,6 +36,9 @@ public :
     void setCurrentWindowIndex(const int newIndex);
     int getNbWindow();
     std::vector<Tab *> getWindows();
+    void setName(const QString & Name);
+    QString getName();
+    int getUPS();
 
 };
 

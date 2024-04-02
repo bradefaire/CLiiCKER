@@ -29,8 +29,8 @@ public:
     std::map<Item *,int> getItems();
     std::map<Upgrade *,int> getUpgrades();
 
-    int AddItem(Item * pitem);//return the amount of UPS gained
-    int AddUpgrade(Upgrade * pupgrade);//return the amount of UPS gained
+    int AddItem(Item * pitem, const int amount=1);//return the amount of UPS gained
+    int AddUpgrade(Upgrade * pupgrade, const int amount=1);//return the amount of UPS gained
 
     Tab(const QString & name, int UPS, int UPC);
     Tab(const QString & name, std::vector<Item *> items, std::vector<Upgrade *> upgrades);
