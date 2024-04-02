@@ -11,12 +11,12 @@ class Player
 {
 public:
     Player();
-    Player(QString name);
-    Player(QString name, //Value
-           int score,
-           int unitPerSecond,
-           int nbWindow ,
-           std::vector<Tab *> ListWindow);
+    Player(QString Name);
+    Player(QString Name, //Value
+           int _score,
+           int _unitPerSecond,
+           int _nbWindow ,
+           std::vector<Tab *> _ListWindow);
 private:
     QString name;
     int score;
