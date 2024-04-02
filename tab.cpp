@@ -15,10 +15,10 @@ Tab::Tab(const QString & name, std::vector<Item *> items, std::vector<Upgrade *>
     unitsPerSecond_ = 0;
     unitsPerClick_ = 1;
     for (Item * pitem : items){
-        this->AddItem(pitem);
+        this->AddItem(pitem,0);
     }
     for (Upgrade * pupgrade : upgrades){
-        this->AddUpgrade(pupgrade);
+        this->AddUpgrade(pupgrade,0);
     }
 }
 
@@ -34,51 +34,51 @@ int Tab::getUPC(){
     return unitsPerClick_;
 }
 
-int Tab::AddItem(Item * pitem){
+int Tab::AddItem(Item * pitem, const int amount){
     int addedUPS = 0;
-    int value;
+    int quantity;
     try {
-        value = items_.at(pitem) + 1;
-        pitem->AddQuantity();
-        Upgrade * pupgrade = pitem->getUpgrade();
-        int bonus = pitem->getBonus() + upgrades_.at(pupgrade) * pupgrade->getBonus();
-        if (pitem->getType() == Item::BonusType::UNITS_PER_CLICK){
-            unitsPerClick_ += bonus;
-        }
-        else{
-            unitsPerSecond_ += bonus;
-            addedUPS = bonus;
-        }
+        quantity = items_.at(pitem) + amount;
     }
     catch (std::out_of_range){
-        value = 0;
+        quantity = amount;
         AddUpgrade(pitem->getUpgrade());
     }
+    pitem->AddQuantity(amount);
+    Upgrade * pupgrade = pitem->getUpgrade();
+    int bonus = (pitem->getBonus() + upgrades_.at(pupgrade) * pupgrade->getBonus()) * amount;
+    if (pitem->getType() == Item::BonusType::UNITS_PER_CLICK){
+        unitsPerClick_ += bonus;
+    }
+    else{
+        unitsPerSecond_ += bonus;
+        addedUPS = bonus;
+    }
 
-    items_[pitem] = value;
+    items_[pitem] = quantity;
     return addedUPS;
 }
 
-int Tab::AddUpgrade(Upgrade * pupgrade){
+int Tab::AddUpgrade(Upgrade * pupgrade, const int amount){
     int addedUPS = 0;
     int level;
     try {
-        level = upgrades_.at(pupgrade) + 1;
-        for (const auto& [pitem,quantity] : items_){
-            if (pitem->getUpgrade() == pupgrade){
-                int bonus = pupgrade->getBonus() * quantity;
-                if (pitem->getType() == Item::BonusType::UNITS_PER_CLICK){
-                    unitsPerClick_ += bonus;
-                }
-                else{
-                    unitsPerSecond_ += bonus;
-                    addedUPS = bonus;
-                }
-            }
-        }
+        level = upgrades_.at(pupgrade) + amount;
     }
     catch (std::out_of_range){
-        level = 0;
+        level = amount;
+    }
+    for (const auto& [pitem,quantity] : items_){
+        if (pitem->getUpgrade() == pupgrade){
+            int bonus = pupgrade->getBonus() * amount;
+            if (pitem->getType() == Item::BonusType::UNITS_PER_CLICK){
+                unitsPerClick_ += bonus;
+            }
+            else{
+                unitsPerSecond_ += bonus;
+                addedUPS = bonus;
+            }
+        }
     }
 
     upgrades_[pupgrade] = level;

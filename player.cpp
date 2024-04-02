@@ -85,3 +85,15 @@ void Player::setCurrentWindowIndex(const int newIndex){
 std::vector<Tab *> Player::getWindows(){
     return listWindow;
 }
+
+void Player::setName(const QString & Name){
+    name = Name;
+}
+
+QString Player::getName(){
+    return name;
+}
+
+int Player::getUPS(){
+    return unitPerSecond;
+}

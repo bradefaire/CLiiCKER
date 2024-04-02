@@ -23,8 +23,8 @@ public:
     void Update(const int deltaTime);
     void ChangeTab(const int tabIndex);
 
-    void SaveGame();
-    void LoadGame();
+    void SaveGame(const QString & filename);
+    void LoadGame(const QString & filename);
     void NewGame();
 };
 

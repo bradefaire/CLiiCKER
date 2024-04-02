@@ -57,7 +57,7 @@ void MainWindow::BuyTab(){
 
 void MainWindow::ButtonPressed(){
     scoreTest++;
-    // pGameManager_->ButtonPressed();
+    pGameManager_->ButtonPressed();
     QString message = QString("score = %1").arg(scoreTest);
     ui->statusbar->showMessage(message);
     return;
