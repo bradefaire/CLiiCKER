@@ -16,8 +16,9 @@ GameManager::GameManager() {
 }
 
 bool GameManager::BuyItem(const QString & itemName){
-    Item * pitem = pplayer_->getCurrentWindow()->getItem(itemName);
-    int price = pitem->Price();
+    Tab * currentWindow = pplayer_->getCurrentWindow();
+    Item * pitem = currentWindow->getItem(itemName);
+    int price = pitem->Price(currentWindow->getItemQuantity(pitem));
     if (price > pplayer_->getScore()){
         return false;
     }

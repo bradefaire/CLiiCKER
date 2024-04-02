@@ -104,3 +104,7 @@ Item * Tab::getItem(const QString & itemName){
 int Tab::getUpgradeLevel(Upgrade * pupgrade){
     return upgrades_.at(pupgrade);
 }
+
+int Tab::getItemQuantity(Item * pitem){
+    return items_.at(pitem);
+}

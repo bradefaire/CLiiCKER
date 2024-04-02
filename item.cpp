@@ -37,8 +37,8 @@ bool Item::isUnlocked() const {
     return unlocked_;
 }
 
-int Item::Price() const {
-    return priceFunction_(quantity_);
+int Item::Price(const int quantity) const {
+    return priceFunction_(quantity);
 }
 
 void Item::Unlock() {

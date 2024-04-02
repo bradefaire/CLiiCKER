@@ -27,7 +27,7 @@ public:
     int getBonus() const;
     BonusType getType() const;
     int getQuantity() const;
-    int Price() const;
+    int Price(const int quantity) const;
 
     Upgrade * getUpgrade();
 
