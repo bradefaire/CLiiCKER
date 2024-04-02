@@ -24,7 +24,7 @@ void MainWindow::BuyUpgrade(const QString & upgradeName){
 }
 
 void MainWindow::BuyTab(){
-    pGameManager_->BuyTab();
+    pGameManager_->BuyTab(QString("New Tab"));
 }
 
 void MainWindow::ButtonPressed(){

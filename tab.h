@@ -6,6 +6,7 @@
 
 #include "item.h"
 #include "upgrade.h"
+#include "vector"
 
 class Tab
 {
@@ -28,7 +29,8 @@ public:
     int AddItem(Item * pitem);//return the amount of UPS gained
     int AddUpgrade(Upgrade * pupgrade);//return the amount of UPS gained
 
-    Tab(QString & name, int UPS, int UPC);
+    Tab(const QString & name, int UPS, int UPC);
+    Tab(const QString & name, std::vector<Item *> items, std::vector<Upgrade *> upgrades);
 };
 
 #endif // TAB_H

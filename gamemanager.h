@@ -5,19 +5,20 @@
 #include "upgrade.h"
 #include "tab.h"
 #include "item.h"
+#include "vector"
 
 class GameManager
 {
 private:
-    Upgrade** upgrades_;
-    Item** items_;
+    std::vector<Upgrade *> upgrades_;
+    std::vector<Item *> items_;
     Player * pplayer_;
 
 public:
     GameManager();
     bool BuyItem(const QString & itemName);
     bool BuyUpgrade(const QString & upgradeName);
-    bool BuyTab();
+    bool BuyTab(const QString & newName);
 };
 
 #endif // GAMEMANAGER_H
