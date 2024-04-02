@@ -8,7 +8,7 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    int score = 0;
+    scoreTest = 0;
     pGameManager_ = new GameManager();
 }
 
@@ -38,12 +38,14 @@ void MainWindow::BuyTab(){
     if (originalButton) {
         QPushButton *newButton = new QPushButton(originalButton->text(), newWidget);
         newButton->setGeometry(originalButton->geometry());
-        QObject::connect(originalButton, &QPushButton::clicked, newButton, &QPushButton::clicked);
+
+        connect(originalButton, &QPushButton::clicked, this, &MainWindow::ButtonPressed);
+
+        connect(newButton, &QPushButton::clicked, this, &MainWindow::ButtonPressed);
     }
     else{
         qDebug()<<"no button";
     }
-
 
     int newIndex = ui->tabWidget->indexOf(newWidget);
 
@@ -51,7 +53,8 @@ void MainWindow::BuyTab(){
 }
 
 void MainWindow::ButtonPressed(){
-    pGameManager_->ButtonPressed();
+    scoreTest++;
+    // pGameManager_->ButtonPressed();
     QString message = QString("score = %1").arg(scoreTest);
     ui->statusbar->showMessage(message);
     return;
@@ -77,5 +80,25 @@ void MainWindow::on_tabWidget_currentChanged(int index)
 void MainWindow::on_pushButton_clicked()
 {
     ButtonPressed();
+}
+
+
+void MainWindow::on_lineEdit_editingFinished()
+{
+    QString tabName = ui->lineEdit->text();
+
+    int tabIndex = -1;
+    for (int i = 0; i < ui->tabWidget->count(); ++i) {
+        if (ui->tabWidget->tabText(i) == tabName) {
+            tabIndex = i;
+            break;
+        }
+    }
+
+    if (tabIndex != -1) {
+        ui->tabWidget->setCurrentIndex(tabIndex);
+    } else {
+        qDebug() << "La tab correspondante n'a pas été trouvée.";
+    }
 }
 
