@@ -105,3 +105,11 @@ void MainWindow::on_lineEdit_editingFinished()
     }
 }
 
+
+void MainWindow::on_pushButton_2_clicked()
+{
+    //button item1
+    QString
+    BuyItem();
+}
+
