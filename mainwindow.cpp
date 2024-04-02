@@ -28,28 +28,31 @@ void MainWindow::BuyUpgrade(const QString & upgradeName){
 void MainWindow::BuyTab(){
     bool ok;
     QString windowName = QInputDialog::getText(this, "Nom de la fenêtre", "Entrez un nom pour la nouvelle fenêtre:", QLineEdit::Normal, "", &ok);
-    pGameManager_->BuyTab(windowName);
-    QWidget *newWidget = new QWidget();
+    if(pGameManager_->BuyTab(windowName))
+    {
+        QWidget *newWidget = new QWidget();
 
-    QWidget *originalWidget = ui->tabWidget->widget(0);
-    newWidget->setLayout(originalWidget->layout());
-    ui->tabWidget->addTab(newWidget,windowName);
-    QPushButton *originalButton = originalWidget->findChild<QPushButton*>("pushButton"); // Remplacez "nom_du_bouton" par l'ID de votre bouton
-    if (originalButton) {
-        QPushButton *newButton = new QPushButton(originalButton->text(), newWidget);
-        newButton->setGeometry(originalButton->geometry());
+        QWidget *originalWidget = ui->tabWidget->widget(0);
+        newWidget->setLayout(originalWidget->layout());
+        ui->tabWidget->addTab(newWidget,windowName);
+        QPushButton *originalButton = originalWidget->findChild<QPushButton*>("pushButton"); // Remplacez "nom_du_bouton" par l'ID de votre bouton
+        if (originalButton) {
+            QPushButton *newButton = new QPushButton(originalButton->text(), newWidget);
+            newButton->setGeometry(originalButton->geometry());
 
-        connect(originalButton, &QPushButton::clicked, this, &MainWindow::ButtonPressed);
+            connect(originalButton, &QPushButton::clicked, this, &MainWindow::ButtonPressed);
 
-        connect(newButton, &QPushButton::clicked, this, &MainWindow::ButtonPressed);
+            connect(newButton, &QPushButton::clicked, this, &MainWindow::ButtonPressed);
+        }
+        else{
+            qDebug()<<"no button";
+        }
+
+        int newIndex = ui->tabWidget->indexOf(newWidget);
+
+        TabChanged(newIndex);
     }
-    else{
-        qDebug()<<"no button";
-    }
-
-    int newIndex = ui->tabWidget->indexOf(newWidget);
-
-    TabChanged(newIndex);
+    else qDebug()<<"ce nom de tab existe déjà";
 }
 
 void MainWindow::ButtonPressed(){
