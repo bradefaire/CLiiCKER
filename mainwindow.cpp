@@ -27,7 +27,7 @@ void MainWindow::BuyTab(){
     // pGameManager_->BuyTab();
     QWidget *newWidget = new QWidget(ui->tabWidget->widget(0));
     ui->tabWidget->addTab(newWidget,"hh");
-    ui->tabWidget
+    // ui->tabWidget
 }
 
 void MainWindow::ButtonPressed(){
