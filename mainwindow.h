@@ -29,8 +29,13 @@ public slots:
 private slots:
     void on_pushButton_6_clicked();
 
+    void on_tabWidget_currentChanged(int index);
+
+    void on_pushButton_clicked();
+
 private:
     Ui::MainWindow *ui;
     GameManager *pGameManager_;
+    int scoreTest;
 };
 #endif // MAINWINDOW_H
