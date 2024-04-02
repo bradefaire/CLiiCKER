@@ -11,7 +11,9 @@ Tab::Tab(const QString & name, int UPS, int UPC) {
 }
 
 Tab::Tab(const QString & name, std::vector<Item *> items, std::vector<Upgrade *> upgrades){
-    Tab(name,0,0);
+    name_ = name;
+    unitsPerSecond_ = 0;
+    unitsPerClick_ = 1;
     for (Item * pitem : items){
         this->AddItem(pitem);
     }
