@@ -26,6 +26,9 @@ public slots:
     void BuyTab();
     void TabChanged(const int);//Tab index
 
+private slots:
+    void on_pushButton_6_clicked();
+
 private:
     Ui::MainWindow *ui;
     GameManager *pGameManager_;

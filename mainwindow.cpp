@@ -24,7 +24,10 @@ void MainWindow::BuyUpgrade(const QString & upgradeName){
 }
 
 void MainWindow::BuyTab(){
-    pGameManager_->BuyTab(QString("New Tab"));
+    // pGameManager_->BuyTab();
+    QWidget *newWidget = new QWidget(ui->tabWidget->widget(0));
+    ui->tabWidget->addTab(newWidget,"hh");
+    // ui->tabWidget
 }
 
 void MainWindow::ButtonPressed(){
@@ -34,3 +37,9 @@ void MainWindow::ButtonPressed(){
 void MainWindow::TabChanged(const int tabIndex){
     return;
 }
+
+void MainWindow::on_pushButton_6_clicked()
+{
+    // BuyTab();
+}
+
