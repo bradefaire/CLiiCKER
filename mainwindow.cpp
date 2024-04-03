@@ -10,6 +10,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     scoreTest = 0;
     pGameManager_ = new GameManager();
+    printScore();
 }
 
 MainWindow::~MainWindow()
@@ -55,11 +56,13 @@ void MainWindow::BuyTab(){
     else qDebug()<<"ce nom de tab existe déjà";
 }
 
-void MainWindow::ButtonPressed(){
-    scoreTest++;
-    pGameManager_->ButtonPressed();
-    QString message = QString("score = %1").arg(scoreTest);
+void MainWindow::printScore(){
+    QString message = QString("score = %1").arg(pGameManager_->getScore());
     ui->statusbar->showMessage(message);
+}
+void MainWindow::ButtonPressed(){
+    pGameManager_->ButtonPressed();
+    printScore();
     return;
 }
 
@@ -71,20 +74,19 @@ void MainWindow::TabChanged(const int tabIndex){
 void MainWindow::on_pushButton_6_clicked()
 {
     BuyTab();
+    printScore();
 }
-
 
 void MainWindow::on_tabWidget_currentChanged(int index)
 {
     TabChanged(ui->tabWidget->currentIndex());
 }
 
-
 void MainWindow::on_pushButton_clicked()
 {
     ButtonPressed();
+    printScore();
 }
-
 
 void MainWindow::on_lineEdit_editingFinished()
 {
@@ -97,7 +99,6 @@ void MainWindow::on_lineEdit_editingFinished()
             break;
         }
     }
-
     if (tabIndex != -1) {
         ui->tabWidget->setCurrentIndex(tabIndex);
     } else {
@@ -105,26 +106,28 @@ void MainWindow::on_lineEdit_editingFinished()
     }
 }
 
-
 void MainWindow::on_pushButton_2_clicked()
 {
-    //button item2
+    //button item 2
     QString name = ui->item2->title();
     BuyItem(name);
+    printScore();
 }
 
 void MainWindow::on_pushButton_5_clicked()
 {
-    //button item2
+    //button item 1
     QString name = ui->item1->title();
     BuyItem(name);
+    printScore();
 }
 
 
 void MainWindow::on_pushButton_4_clicked()
 {
-    //iupgrade item 1
+    //upgrade item 1
      QString name = ui->item1->title();
     BuyUpgrade(name);
+    printScore();
 }
 

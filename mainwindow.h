@@ -14,7 +14,7 @@ QT_END_NAMESPACE
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
-
+    friend GameManager;
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
@@ -45,5 +45,6 @@ private:
     Ui::MainWindow *ui;
     GameManager *pGameManager_;
     int scoreTest;
+    void printScore();
 };
 #endif // MAINWINDOW_H

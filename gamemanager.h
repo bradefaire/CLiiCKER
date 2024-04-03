@@ -9,7 +9,7 @@
 
 class GameManager
 {
-private:
+public:
     std::vector<Upgrade *> upgrades_;
     std::vector<Item *> items_;
     Player * pplayer_;
@@ -25,7 +25,8 @@ public:
 
     void SaveGame(const QString & filename);
     void LoadGame(const QString & filename);
-    void NewGame();
+    void NewGame(const QString &);
+    int getScore();
 };
 
 #endif // GAMEMANAGER_H

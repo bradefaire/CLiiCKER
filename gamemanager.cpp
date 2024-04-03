@@ -11,8 +11,8 @@ GameManager::GameManager() {
     upgrades_ = std::vector<Upgrade *>();
     items_ = std::vector<Item *>();
 
-    Upgrade * pupgrade0 = new Upgrade(QString("U1"),QString("Increase UPC by 1"),1,[](const int currentLevel) { return currentLevel;});
-    Item * pitem0 = new Item(QString("I1"),QString("Increase the UPC by 1"),1,Item::BonusType::UNITS_PER_CLICK,[](int quantity) { return 2*quantity;},pupgrade0);
+    Upgrade * pupgrade0 = new Upgrade(QString("U1"),QString("Increase UPC by 1"),1,[](const int currentLevel) { return currentLevel + 1;});
+    Item * pitem0 = new Item(QString("I1"),QString("Increase the UPC by 1"),1,Item::BonusType::UNITS_PER_CLICK,[](int quantity) { return 2*quantity+1;},pupgrade0);
 
     upgrades_.push_back(pupgrade0);
     items_.push_back(pitem0);
@@ -29,6 +29,7 @@ bool GameManager::BuyItem(const QString & itemName){
     Tab * currentWindow = pplayer_->getCurrentWindow();
     Item * pitem = currentWindow->getItem(itemName);
     int price = pitem->Price(currentWindow->getItemQuantity(pitem));
+    qDebug()<<price<< "   "<< currentWindow->getItemQuantity(pitem);
     if (price > pplayer_->getScore()){
         return false;
     }
@@ -38,9 +39,9 @@ bool GameManager::BuyItem(const QString & itemName){
     return true;
 }
 
-bool GameManager::BuyUpgrade(const QString & upgradeName){
+bool GameManager::BuyUpgrade(const QString & itemName){
     Tab * currentWindow = pplayer_->getCurrentWindow();
-    Upgrade * pupgrade = currentWindow->getUpgrade(upgradeName);
+    Upgrade * pupgrade = currentWindow->getItem(itemName)->getUpgrade();
     int price = pupgrade->Price(currentWindow->getUpgradeLevel(pupgrade));
     if (price > pplayer_->getScore()){
         return false;
@@ -151,6 +152,11 @@ void GameManager::LoadGame(const QString & filename){
 
 }
 
-void GameManager::NewGame(){
-    pplayer_ = new Player();
+void GameManager::NewGame(const QString & name){
+    pplayer_ = new Player(name);
+}
+
+int GameManager::getScore()
+{
+    return pplayer_->getScore();
 }
