@@ -14,15 +14,15 @@ QT_END_NAMESPACE
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
-    friend GameManager;
+
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
 public slots:
     void ButtonPressed();
-    void BuyItem(const QString & itemName);
-    void BuyUpgrade(const QString & upgradeName);
+    void BuyItem(const QString & itemName, int n);
+    void BuyUpgrade(const QString & upgradeName, int n);
     void BuyTab();
     void TabChanged(const int);//Tab index
 
@@ -41,10 +41,16 @@ private slots:
 
     void on_pushButton_4_clicked();
 
+    void on_pushButton_3_clicked();
+
 private:
     Ui::MainWindow *ui;
     GameManager *pGameManager_;
     int scoreTest;
+    int quantityItem1;
+    int levelUpgrade1;
+    int quantityItem2;
+    int levelUpgrade2;
     void printScore();
 };
 #endif // MAINWINDOW_H
