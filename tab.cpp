@@ -1,6 +1,7 @@
 #include "tab.h"
 
 #include <stdexcept>
+#include <QDebug>
 
 Tab::Tab(const QString & name, int UPS, int UPC) {
 
@@ -10,15 +11,12 @@ Tab::Tab(const QString & name, int UPS, int UPC) {
 
 }
 
-Tab::Tab(const QString & name, std::vector<Item *> items, std::vector<Upgrade *> upgrades){
+Tab::Tab(const QString & name, std::vector<Item *> items){
     name_ = name;
     unitsPerSecond_ = 0;
     unitsPerClick_ = 1;
     for (Item * pitem : items){
         this->AddItem(pitem,0);
-    }
-    for (Upgrade * pupgrade : upgrades){
-        this->AddUpgrade(pupgrade,0);
     }
 }
 
@@ -42,7 +40,7 @@ int Tab::AddItem(Item * pitem, const int amount){
     }
     catch (std::out_of_range){
         quantity = amount;
-        AddUpgrade(pitem->getUpgrade());
+        AddUpgrade(pitem->getUpgrade(),0);
     }
     pitem->AddQuantity(amount);
     Upgrade * pupgrade = pitem->getUpgrade();
@@ -82,6 +80,9 @@ int Tab::AddUpgrade(Upgrade * pupgrade, const int amount){
     }
 
     upgrades_[pupgrade] = level;
+
+    qDebug() << " upgrade added : " << amount;
+
     return addedUPS;
 }
 

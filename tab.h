@@ -33,7 +33,7 @@ public:
     int AddUpgrade(Upgrade * pupgrade, const int amount=1);//return the amount of UPS gained
 
     Tab(const QString & name, int UPS, int UPC);
-    Tab(const QString & name, std::vector<Item *> items, std::vector<Upgrade *> upgrades);
+    Tab(const QString & name, std::vector<Item *> items);
 };
 
 #endif // TAB_H

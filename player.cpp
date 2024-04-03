@@ -102,3 +102,11 @@ QString Player::getName(){
 int Player::getUPS(){
     return unitPerSecond;
 }
+
+void Player::AddItem(Item *pitem){
+    unitPerSecond += getCurrentWindow()->AddItem(pitem);
+}
+
+void Player::AddUpgrade(Upgrade *pupgrade){
+    unitPerSecond += getCurrentWindow()->AddUpgrade(pupgrade);
+}

@@ -13,6 +13,7 @@ public:
     std::vector<Upgrade *> upgrades_;
     std::vector<Item *> items_;
     Player * pplayer_;
+    int accumulatedScore_;
 
 public slots:
     void Update(const int deltaTime);
