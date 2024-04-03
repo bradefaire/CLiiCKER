@@ -8,24 +8,21 @@
 
 GameManager::GameManager() {
 
-    upgrades_ = std::vector<Upgrade *>();
+    accumulatedScore_ = 0;
+
     items_ = std::vector<Item *>();
 
     Upgrade * pupgrade0 = new Upgrade(QString("U0"),QString("Increase UPC by 1"),1,[](const int currentLevel) { return currentLevel + 1;});
     Item * pitem0 = new Item(QString("Better click"),QString("Increase the UPC by 1"),1,Item::BonusType::UNITS_PER_CLICK,[](int quantity) { return 2*quantity+1;},pupgrade0);
 
-    upgrades_.push_back(pupgrade0);
     items_.push_back(pitem0);
 
     Upgrade * pupgrade1 = new Upgrade(QString("U1"),QString("Increase UPS by 1"),1,[](const int currentLevel){ return currentLevel + 1;});
     Item * pitem1 = new Item(QString("AutoClick"),QString("Increase the UPS by 1"),1,Item::BonusType::UNITS_PER_SECOND,[](int quantity){return 2*quantity+1;},pupgrade1);
 
-    upgrades_.push_back(pupgrade1);
     items_.push_back(pitem1);
 
-    Tab * tab1 = new Tab("Tab 1",items_,upgrades_);
-
-    tab1->AddItem(pitem1);
+    Tab * tab1 = new Tab("Tab 1",items_);
 
     pplayer_ = new Player();
 
@@ -41,9 +38,8 @@ bool GameManager::BuyItem(const QString & itemName){
     if (price > pplayer_->getScore()){
         return false;
     }
-    int addedUPS = pplayer_->getCurrentWindow()->AddItem(pitem);
     pplayer_->removeScore(price);
-    pplayer_->addUnitsPerSecond(addedUPS);
+    pplayer_->AddItem(pitem);
     return true;
 }
 
@@ -54,9 +50,8 @@ bool GameManager::BuyUpgrade(const QString & itemName){
     if (price > pplayer_->getScore()){
         return false;
     }
-    int addedUPS = currentWindow->AddUpgrade(pupgrade);
     pplayer_->removeScore(price);
-    pplayer_->addUnitsPerSecond(addedUPS);
+    pplayer_->AddUpgrade(pupgrade);
     return true;
 }
 
@@ -73,18 +68,18 @@ bool GameManager::BuyTab(const QString & newName){
         return false;
     }
     pplayer_->removeScore(price);
-    pplayer_->setCurrentWindowIndex(pplayer_->addListWindow(new Tab(newName,items_,upgrades_)) - 1);
+    pplayer_->setCurrentWindowIndex(pplayer_->addListWindow(new Tab(newName,items_)) - 1);
     return true;
 }
 
 void GameManager::ButtonPressed(){
-    qDebug() << "UnitsPerClick : " << pplayer_->getCurrentWindow()->getUPC();
     pplayer_->addScore(pplayer_->getCurrentWindow()->getUPC());
-    qDebug() << "pete moi le cul : " << pplayer_->getScore();
 }
 
 void GameManager::Update(const int deltaTime){
-    //pplayer_->addScore(static_cast<double>(pplayer_->getCurrentWindow()->getUPS() * deltaTime)/1000);
+    accumulatedScore_ += pplayer_->getUPS()*deltaTime;
+    pplayer_->addScore(accumulatedScore_/1000);
+    accumulatedScore_ %= 1000;
 }
 
 void GameManager::ChangeTab(const int tabIndex){
@@ -144,7 +139,7 @@ void GameManager::LoadGame(const QString & filename){
     // c'est déguelasse il faudrait changer de la structure
     for (int i=0; i<tabsArray.size(); i++){
         QJsonObject tabObject = tabsArray[i].toObject();
-        Tab * tab = new Tab(tabObject.value("name").toString(),items_,upgrades_);
+        Tab * tab = new Tab(tabObject.value("name").toString(),items_);
         QJsonObject itemsObject = tabObject.value("items").toObject();
         QJsonObject upgradesObject = tabObject.value("upgrades").toObject();
         for (const QString& itemName : itemsObject.keys() ){

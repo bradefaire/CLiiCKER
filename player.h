@@ -39,6 +39,8 @@ public :
     void setName(const QString & Name);
     QString getName();
     int getUPS();
+    void AddItem(Item * pitem);
+    void AddUpgrade(Upgrade * pupgrade);
 
 };
 
