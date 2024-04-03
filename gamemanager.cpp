@@ -11,11 +11,17 @@ GameManager::GameManager() {
     upgrades_ = std::vector<Upgrade *>();
     items_ = std::vector<Item *>();
 
-    Upgrade * pupgrade0 = new Upgrade(QString("U1"),QString("Increase UPC by 1"),1,[](const int currentLevel) { return currentLevel + 1;});
-    Item * pitem0 = new Item(QString("I1"),QString("Increase the UPC by 1"),1,Item::BonusType::UNITS_PER_CLICK,[](int quantity) { return 2*quantity+1;},pupgrade0);
+    Upgrade * pupgrade0 = new Upgrade(QString("U0"),QString("Increase UPC by 1"),1,[](const int currentLevel) { return currentLevel + 1;});
+    Item * pitem0 = new Item(QString("Better click"),QString("Increase the UPC by 1"),1,Item::BonusType::UNITS_PER_CLICK,[](int quantity) { return 2*quantity+1;},pupgrade0);
 
     upgrades_.push_back(pupgrade0);
     items_.push_back(pitem0);
+
+    Upgrade * pupgrade1 = new Upgrade(QString("U1"),QString("Increase UPS by 1"),1,[](const int currentLevel){ return currentLevel + 1;});
+    Item * pitem1 = new Item(QString("AutoClick"),QString("Increase the UPS by 1"),1,Item::BonusType::UNITS_PER_SECOND,[](int quantity){return 2*quantity+1;},pupgrade1);
+
+    upgrades_.push_back(pupgrade1);
+    items_.push_back(pitem1);
 
     Tab * tab1 = new Tab("Tab 1",items_,upgrades_);
 
