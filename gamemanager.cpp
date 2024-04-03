@@ -25,6 +25,8 @@ GameManager::GameManager() {
 
     Tab * tab1 = new Tab("Tab 1",items_,upgrades_);
 
+    tab1->AddItem(pitem1);
+
     pplayer_ = new Player();
 
     pplayer_->addListWindow(tab1);
@@ -82,7 +84,7 @@ void GameManager::ButtonPressed(){
 }
 
 void GameManager::Update(const int deltaTime){
-    pplayer_->addScore(pplayer_->getCurrentWindow()->getUPS() * deltaTime);
+    //pplayer_->addScore(static_cast<double>(pplayer_->getCurrentWindow()->getUPS() * deltaTime)/1000);
 }
 
 void GameManager::ChangeTab(const int tabIndex){

@@ -85,10 +85,10 @@ int Tab::AddUpgrade(Upgrade * pupgrade, const int amount){
     return addedUPS;
 }
 
-Upgrade * Tab::getUpgrade(const QString & upgradeName){
-    for (auto const& kv : upgrades_){
-        if ((kv.first)->getName() == upgradeName){
-            return kv.first;
+Upgrade * Tab::getUpgrade(const QString & itemName){
+    for (auto const& kv : items_){
+        if ((kv.first)->getName() == itemName){
+            return kv.first->getUpgrade();
         }
     }
     throw new std::out_of_range("non-existing upgrade");

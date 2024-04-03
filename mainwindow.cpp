@@ -17,11 +17,19 @@ MainWindow::MainWindow(QWidget *parent)
     levelUpgrade2 = 0;
 
     printScore();
+
+    ptimer = new QTimer(this);
+
+    const int interval = 1;
+    ptimer->setInterval(interval);
+    connect(ptimer,SIGNAL(timeout()),this,SLOT(Update()));
+    ptimer->start();
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+    delete ptimer;
 }
 
 
@@ -159,3 +167,7 @@ void MainWindow::on_pushButton_3_clicked()
     printScore();
 }
 
+void MainWindow::Update(){
+    pGameManager_->Update(ptimer->interval());
+    printScore();
+}

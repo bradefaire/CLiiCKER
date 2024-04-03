@@ -14,13 +14,15 @@ public:
     std::vector<Item *> items_;
     Player * pplayer_;
 
+public slots:
+    void Update(const int deltaTime);
+
 public:
     GameManager();
     bool BuyItem(const QString & itemName);
     bool BuyUpgrade(const QString & upgradeName);
     bool BuyTab(const QString & newName);
     void ButtonPressed();
-    void Update(const int deltaTime);
     void ChangeTab(const int tabIndex);
 
     void SaveGame(const QString & filename);
