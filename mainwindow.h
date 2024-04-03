@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QTimer>
 
 #include "gamemanager.h"
 
@@ -41,10 +42,13 @@ private slots:
 
     void on_pushButton_4_clicked();
 
+    void Update();
+
 private:
     Ui::MainWindow *ui;
     GameManager *pGameManager_;
     int scoreTest;
     void printScore();
+    QTimer * ptimer;
 };
 #endif // MAINWINDOW_H

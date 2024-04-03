@@ -31,7 +31,7 @@ Player::Player(QString Name, int _score, int _unitPerSecond, int _nbWindow, std:
 }
 
 void Player::addScore(const int addedScore){
-    if (!(addedScore > 0)){
+    if (addedScore < 0){
         throw new std::invalid_argument("the added score should be strictly positive");
     }
     score += addedScore;

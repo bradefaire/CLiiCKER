@@ -11,11 +11,19 @@ MainWindow::MainWindow(QWidget *parent)
     scoreTest = 0;
     pGameManager_ = new GameManager();
     printScore();
+
+    ptimer = new QTimer(this);
+
+    const int interval = 1;
+    ptimer->setInterval(interval);
+    connect(ptimer,SIGNAL(timeout()),this,SLOT(Update()));
+    ptimer->start();
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+    delete ptimer;
 }
 
 void MainWindow::BuyItem(const QString & itemName){
@@ -131,3 +139,7 @@ void MainWindow::on_pushButton_4_clicked()
     printScore();
 }
 
+void MainWindow::Update(){
+    pGameManager_->Update(ptimer->interval());
+    printScore();
+}
