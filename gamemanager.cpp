@@ -37,7 +37,6 @@ bool GameManager::BuyItem(const QString & itemName){
     Tab * currentWindow = pplayer_->getCurrentWindow();
     Item * pitem = currentWindow->getItem(itemName);
     int price = pitem->Price(currentWindow->getItemQuantity(pitem));
-    qDebug()<<price<< "   "<< currentWindow->getItemQuantity(pitem);
     if (price > pplayer_->getScore()){
         return false;
     }
@@ -63,13 +62,13 @@ bool GameManager::BuyUpgrade(const QString & itemName){
 bool GameManager::BuyTab(const QString & newName){
     for (Tab * ptab : pplayer_->getWindows()){
         if (ptab->getName() == newName){
-            throw new std::invalid_argument("This name is already taken");
+            qDebug()<<("This name is already taken");
             return false;
         }
     }
     int price = pplayer_->getWindowPrice(pplayer_->getNbWindow());
     if (price > pplayer_->getScore()){
-        throw std::string("exception : not enough money to spend");
+        qDebug()<<("exception : not enough money to spend");
         return false;
     }
     pplayer_->removeScore(price);

@@ -54,6 +54,8 @@ private:
     int quantityItem2;
     int levelUpgrade2;
     void printScore();
+    int getPriceBuy(const QString & itemName,int quantity);
+    int getPriceUpdate(const QString & itemName,int quantity);
     QTimer * ptimer;
 };
 #endif // MAINWINDOW_H

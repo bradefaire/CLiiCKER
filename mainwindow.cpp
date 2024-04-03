@@ -11,12 +11,17 @@ MainWindow::MainWindow(QWidget *parent)
     scoreTest = 0;
     pGameManager_ = new GameManager();
 
-    quantityItem1 = 0;
-    levelUpgrade1 = 0;
-    quantityItem2 = 0;
-    levelUpgrade2 = 0;
+    quantityItem1 = 1;
+    levelUpgrade1 = 1;
+    quantityItem2 = 1;
+    levelUpgrade2 = 1;
 
     printScore();
+
+    ui->number_10->setText(QString("%1").arg(getPriceBuy(ui->item1->title(),quantityItem1)));
+    ui->number->setText(QString("%1").arg(getPriceBuy(ui->item2->title(),quantityItem2)));
+    ui->number_8->setText(QString("%1").arg(getPriceUpdate(ui->item1->title(),levelUpgrade1)));
+    ui->number_2->setText(QString("%1").arg(getPriceUpdate(ui->item2->title(),levelUpgrade2)));
 
     ptimer = new QTimer(this);
 
@@ -32,32 +37,56 @@ MainWindow::~MainWindow()
     delete ptimer;
 }
 
+int MainWindow::getPriceBuy(const QString & itemName,int quantity)
+{
+    return pGameManager_->pplayer_->getCurrentWindow()->getItem(itemName)->Price(quantity);
+}
+
+int MainWindow::getPriceUpdate(const QString & itemName,int quantity)
+{
+    return pGameManager_->pplayer_->getCurrentWindow()->getUpgrade(itemName)->Price(quantity);
+}
 
 void MainWindow::BuyItem(const QString & itemName,int n){
     printScore();
+    if (!pGameManager_->BuyItem(itemName)) return;
     int price;
 
-    if (n==1) price = pGameManager_->pplayer_->getCurrentWindow()->getItem(itemName)->Price(quantityItem1++);
-    else price = pGameManager_->pplayer_->getCurrentWindow()->getItem(itemName)->Price(quantityItem2++);
+    if (n==1){
+        price = getPriceBuy(itemName,quantityItem1++);
+        ui->number_10->setText(QString("%1").arg(price));
+        ui->number_7->setText(QString("%1").arg(quantityItem1));
+    }
+    else if (n==2){
+        price = getPriceBuy(itemName,quantityItem2++);
+        ui->number->setText(QString("%1").arg(price));
+        ui->number_5->setText(QString("%1").arg(quantityItem2));
+    }
+    else qDebug()<<"t'es nul/le";
 
-    ui->number_10->setText(QString("%1").arg(price));
-    pGameManager_->BuyItem(itemName);
 }
 
 void MainWindow::BuyUpgrade(const QString & itemName, int n){
+    if (!pGameManager_->BuyUpgrade(itemName)) return;
     int level;
 
-    if (n==1) level = pGameManager_->pplayer_->getCurrentWindow()->getUpgrade(itemName)->Price(levelUpgrade1++);
-    else level = pGameManager_->pplayer_->getCurrentWindow()->getUpgrade(itemName)->Price(levelUpgrade2++);
-
-    ui->number_10->setText(QString("%1").arg(level));
-    pGameManager_->BuyUpgrade(itemName);
+    if (n==1){
+        level = getPriceUpdate(itemName,levelUpgrade1++);
+        ui->number_8->setText(QString("%1").arg(level));
+        ui->number_9->setText(QString("%1").arg(levelUpgrade1));
+    }
+    else if (n==2){
+        level = getPriceUpdate(itemName,levelUpgrade2++);
+        ui->number_2->setText(QString("%1").arg(level));
+        ui->number_6->setText(QString("%1").arg(levelUpgrade2));
+    }
+    else qDebug()<<"t'es nul/le";
 }
 
 void MainWindow::BuyTab(){
     bool ok;
     QString windowName = QInputDialog::getText(this, "Nom de la fenêtre", "Entrez un nom pour la nouvelle fenêtre:", QLineEdit::Normal, "", &ok);
-    if(pGameManager_->BuyTab(windowName)) //à modifier en try and catch
+    if(pGameManager_->BuyTab(windowName))
     {
         QWidget *newWidget = new QWidget();
 
@@ -79,7 +108,7 @@ void MainWindow::BuyTab(){
 
         int newIndex = ui->tabWidget->indexOf(newWidget);
 
-       TabChanged(newIndex);
+        TabChanged(newIndex);
     }
     else qDebug()<<"ce nom de tab existe déjà";
 }

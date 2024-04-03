@@ -91,7 +91,7 @@
               <item>
                <widget class="QLabel" name="number_8">
                 <property name="text">
-                 <string>56</string>
+                 <string>0</string>
                 </property>
                </widget>
               </item>
@@ -111,7 +111,7 @@
               <item>
                <widget class="QLabel" name="number_10">
                 <property name="text">
-                 <string>56</string>
+                 <string>0</string>
                 </property>
                </widget>
               </item>
@@ -131,7 +131,7 @@
               <item>
                <widget class="QLabel" name="number_9">
                 <property name="text">
-                 <string>56</string>
+                 <string>1</string>
                 </property>
                </widget>
               </item>
@@ -151,7 +151,7 @@
               <item>
                <widget class="QLabel" name="number_7">
                 <property name="text">
-                 <string>56</string>
+                 <string>1</string>
                 </property>
                </widget>
               </item>
@@ -169,7 +169,7 @@
          <string notr="true">color: rgb(0, 0, 0);</string>
         </property>
         <property name="title">
-         <string>AutoCLick</string>
+         <string>AutoClick</string>
         </property>
         <layout class="QGridLayout" name="gridLayout_3">
          <item row="1" column="0">
@@ -197,7 +197,7 @@
               <item>
                <widget class="QLabel" name="number">
                 <property name="text">
-                 <string>56</string>
+                 <string>0</string>
                 </property>
                </widget>
               </item>
@@ -227,7 +227,7 @@
               <item>
                <widget class="QLabel" name="number_5">
                 <property name="text">
-                 <string>56</string>
+                 <string>1</string>
                 </property>
                </widget>
               </item>
@@ -247,7 +247,7 @@
               <item>
                <widget class="QLabel" name="number_6">
                 <property name="text">
-                 <string>56</string>
+                 <string>1</string>
                 </property>
                </widget>
               </item>
@@ -267,7 +267,7 @@
               <item>
                <widget class="QLabel" name="number_2">
                 <property name="text">
-                 <string>56</string>
+                 <string>0</string>
                 </property>
                </widget>
               </item>
@@ -369,7 +369,7 @@ color: rgb(0, 0, 0);</string>
      <x>0</x>
      <y>0</y>
      <width>875</width>
-     <height>22</height>
+     <height>25</height>
     </rect>
    </property>
    <property name="nativeMenuBar">
