@@ -48,12 +48,12 @@
        </layout>
       </item>
       <item>
-       <widget class="QGroupBox" name="groupBox_2">
+       <widget class="QGroupBox" name="item1">
         <property name="styleSheet">
          <string notr="true">color: rgb(0, 0, 0);</string>
         </property>
         <property name="title">
-         <string>Item1</string>
+         <string>I1</string>
         </property>
         <layout class="QGridLayout" name="gridLayout_4">
          <item row="0" column="0">
@@ -154,7 +154,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QGroupBox" name="groupBox">
+       <widget class="QGroupBox" name="item2">
         <property name="styleSheet">
          <string notr="true">color: rgb(0, 0, 0);</string>
         </property>

@@ -106,9 +106,25 @@ void MainWindow::on_lineEdit_editingFinished()
 }
 
 
-// void MainWindow::on_pushButton_2_clicked()
-// {
-//     //button item1
-//     QString name = ui->centralwidget->
-// }
+void MainWindow::on_pushButton_2_clicked()
+{
+    //button item2
+    QString name = ui->item2->title();
+    BuyItem(name);
+}
+
+void MainWindow::on_pushButton_5_clicked()
+{
+    //button item2
+    QString name = ui->item1->title();
+    BuyItem(name);
+}
+
+
+void MainWindow::on_pushButton_4_clicked()
+{
+    //iupgrade item 1
+     QString name = ui->item1->title();
+    BuyUpgrade(name);
+}
 

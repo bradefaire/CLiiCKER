@@ -17,7 +17,7 @@ GameManager::GameManager() {
     upgrades_.push_back(pupgrade0);
     items_.push_back(pitem0);
 
-    Tab * tab1 = new Tab("Hello World",items_,upgrades_);
+    Tab * tab1 = new Tab("Tab 1",items_,upgrades_);
 
     pplayer_ = new Player();
 
