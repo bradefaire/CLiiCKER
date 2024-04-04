@@ -45,6 +45,8 @@ private slots:
     void on_pushButton_3_clicked();
     void Update();
 
+    void on_tabWidget_tabBarClicked(int index);
+
 private:
     Ui::MainWindow *ui;
     GameManager *pGameManager_;

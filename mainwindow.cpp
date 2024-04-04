@@ -53,14 +53,19 @@ void MainWindow::BuyItem(const QString & itemName,int n){
     int price;
 
     if (n==1){
-        price = getPriceBuy(itemName,quantityItem1++);
+        Item * pitem1 = pGameManager_->pplayer_->getCurrentWindow()->getItem(itemName);
+        int quantity1 = pGameManager_->pplayer_->getCurrentWindow()->getItemQuantity(pitem1);
+
+        price = getPriceBuy(itemName,quantity1);
         ui->number_10->setText(QString("%1").arg(price));
-        ui->number_7->setText(QString("%1").arg(quantityItem1));
+        ui->number_7->setText(QString("%1").arg(quantity1));
     }
     else if (n==2){
-        price = getPriceBuy(itemName,quantityItem2++);
+        Item * pitem2 = pGameManager_->pplayer_->getCurrentWindow()->getItem(itemName);
+        int quantity2 = pGameManager_->pplayer_->getCurrentWindow()->getItemQuantity(pitem2);
+        price = getPriceBuy(itemName,quantity2);
         ui->number->setText(QString("%1").arg(price));
-        ui->number_5->setText(QString("%1").arg(quantityItem2));
+        ui->number_5->setText(QString("%1").arg(quantity2));
     }
     else qDebug()<<"t'es nul/le";
 
@@ -68,17 +73,21 @@ void MainWindow::BuyItem(const QString & itemName,int n){
 
 void MainWindow::BuyUpgrade(const QString & itemName, int n){
     if (!pGameManager_->BuyUpgrade(itemName)) return;
-    int level;
+    int levelPrice;
 
     if (n==1){
-        level = getPriceUpdate(itemName,levelUpgrade1++);
-        ui->number_8->setText(QString("%1").arg(level));
-        ui->number_9->setText(QString("%1").arg(levelUpgrade1));
+        Item * pitem1 = pGameManager_->pplayer_->getCurrentWindow()->getItem(itemName);
+        int level1 = pGameManager_->pplayer_->getCurrentWindow()->getUpgradeLevel(pitem1->getUpgrade());
+        levelPrice = getPriceUpdate(itemName,level1);
+        ui->number_8->setText(QString("%1").arg(levelPrice));
+        ui->number_9->setText(QString("%1").arg(level1));
     }
     else if (n==2){
-        level = getPriceUpdate(itemName,levelUpgrade2++);
-        ui->number_2->setText(QString("%1").arg(level));
-        ui->number_6->setText(QString("%1").arg(levelUpgrade2));
+        Item * pitem2 = pGameManager_->pplayer_->getCurrentWindow()->getItem(itemName);
+        int level2 = pGameManager_->pplayer_->getCurrentWindow()->getUpgradeLevel(pitem2->getUpgrade());
+        levelPrice = getPriceUpdate(itemName,level2);
+        ui->number_2->setText(QString("%1").arg(levelPrice));
+        ui->number_6->setText(QString("%1").arg(level2));
     }
     else qDebug()<<"t'es nul/le";
 }
@@ -125,6 +134,26 @@ void MainWindow::ButtonPressed(){
 
 void MainWindow::TabChanged(const int tabIndex){
     ui->tabWidget->setCurrentIndex(tabIndex);
+
+    QString itemName1 = ui->item1->title();
+    Item * pitem1 = pGameManager_->pplayer_->getCurrentWindow()->getItem(itemName1);
+    int quantity1 = pGameManager_->pplayer_->getCurrentWindow()->getItemQuantity(pitem1);
+    int level1 = pGameManager_->pplayer_->getCurrentWindow()->getUpgradeLevel(pitem1->getUpgrade());
+
+    ui->number_10->setText(QString("%1").arg(getPriceBuy(ui->item1->title(),quantity1)));//item
+    ui->number_7->setText(QString("%1").arg(quantity1));
+    ui->number_8->setText(QString("%1").arg(getPriceUpdate(ui->item1->title(),level1)));//upgrade
+    ui->number_9->setText(QString("%1").arg(level1));
+
+    QString itemName2 = ui->item2->title();
+    Item * pitem2 = pGameManager_->pplayer_->getCurrentWindow()->getItem(itemName2);
+    int quantity2 = pGameManager_->pplayer_->getCurrentWindow()->getItemQuantity(pitem2);
+    int level2 = pGameManager_->pplayer_->getCurrentWindow()->getUpgradeLevel(pitem2->getUpgrade());
+
+    ui->number->setText(QString("%1").arg(getPriceBuy(ui->item2->title(),quantity2)));//item
+    ui->number_5->setText(QString("%1").arg(quantity2));
+    ui->number_2->setText(QString("%1").arg(getPriceUpdate(ui->item2->title(),level2)));//upgrade
+    ui->number_6->setText(QString("%1").arg(level2));
     return;
 }
 
@@ -200,3 +229,9 @@ void MainWindow::Update(){
     pGameManager_->Update(ptimer->interval());
     printScore();
 }
+
+void MainWindow::on_tabWidget_tabBarClicked(int index)
+{
+
+}
+
