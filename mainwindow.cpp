@@ -2,6 +2,7 @@
 #include "./ui_mainwindow.h"
 
 #include <QInputDialog>
+#include <QFileDialog>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -223,7 +224,6 @@ void MainWindow::on_pushButton_4_clicked()
     printScore();
 }
 
-
 void MainWindow::on_pushButton_3_clicked()
 {
     //upgrade item2
@@ -236,3 +236,35 @@ void MainWindow::Update(){
     pGameManager_->Update(ptimer->interval());
     printScore();
 }
+
+void MainWindow::on_actionSave_triggered()
+{
+    pGameManager_->SaveGame(pGameManager_->pplayer_->getName());
+}
+
+
+void MainWindow::on_actionOpen_triggered()
+{
+    QString fileName = QFileDialog::getOpenFileName(this,
+                                                    tr("Ouvrir un fichier"),
+                                                    "",
+                                                    "Text files (*.json)");
+    if (fileName != nullptr){
+        pGameManager_->LoadGame(fileName);
+    }
+
+}
+
+
+void MainWindow::on_actionCreate_triggered()
+{
+    pGameManager_->SaveGame(pGameManager_->pplayer_->getName());
+    bool ok;
+    QString fileName = QInputDialog::getText(this, "Nom du fichier", "Entrez un nom pour la nouvelle game :", QLineEdit::Normal, "", &ok);
+    if(ok)
+    {
+        pGameManager_->NewGame(fileName);
+    }
+
+}
+

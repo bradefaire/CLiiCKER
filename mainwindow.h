@@ -46,6 +46,12 @@ private slots:
     void Update();
 
 
+    void on_actionSave_triggered();
+
+    void on_actionOpen_triggered();
+
+    void on_actionCreate_triggered();
+
 private:
     Ui::MainWindow *ui;
     GameManager *pGameManager_;
