@@ -32,8 +32,8 @@ public:
     int AddItem(Item * pitem, const int amount=1);//return the amount of UPS gained
     int AddUpgrade(Upgrade * pupgrade, const int amount=1);//return the amount of UPS gained
 
-    Tab(const QString & name, int UPS, int UPC);
-    Tab(const QString & name, std::vector<Item *> items);
+    Tab(const QString & name, const int UPS, const int UPC);
+    Tab(const QString & name, std::vector<Item *> items,const int UPC=1);
     ~Tab() = default;
 };
 

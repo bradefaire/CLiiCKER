@@ -1,6 +1,7 @@
 #include "player.h"
 
 #include <stdexcept>
+#include <math.h>
 
 Player::Player() {
     score = 0;
@@ -82,8 +83,8 @@ void Player::addUnitsPerSecond(const int addedScore){
     unitPerSecond += addedScore;
 }
 
-int Player::getWindowPrice(int currentNbWindow){
-    return 56;
+int Player::getWindowPrice(){
+    return static_cast<int>(1000 + 100*pow(nbWindow,3));
 }
 
 int Player::getNbWindow(){

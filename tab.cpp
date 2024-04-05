@@ -3,7 +3,7 @@
 #include <stdexcept>
 #include <QDebug>
 
-Tab::Tab(const QString & name, int UPS, int UPC) {
+Tab::Tab(const QString & name, const int UPS, const int UPC) {
 
     name_ = name;
     unitsPerSecond_ = UPS;
@@ -11,10 +11,10 @@ Tab::Tab(const QString & name, int UPS, int UPC) {
 
 }
 
-Tab::Tab(const QString & name, std::vector<Item *> items){
+Tab::Tab(const QString & name, std::vector<Item *> items, const int UPC){
     name_ = name;
     unitsPerSecond_ = 0;
-    unitsPerClick_ = 1;
+    unitsPerClick_ = UPC;
     for (Item * pitem : items){
         this->AddItem(pitem,0);
     }

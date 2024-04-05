@@ -122,7 +122,7 @@ void MainWindow::BuyTab(){
         ui->tabWidget->setCurrentIndex(newIndex);
         TabChanged(newIndex);
 
-        int newPrice = pGameManager_->pplayer_->getWindowPrice(pGameManager_->pplayer_->getNbWindow());
+        int newPrice = pGameManager_->pplayer_->getWindowPrice();
         ui->label_3->setText(QString("%1").arg(newPrice));
     }
     else qDebug()<<"ce nom de tab existe déjà";

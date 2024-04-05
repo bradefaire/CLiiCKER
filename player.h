@@ -32,7 +32,7 @@ public :
     void removeScore(const int score);
     int getScore();
     void addUnitsPerSecond(const int score);
-    int getWindowPrice(int nbWindow);
+    int getWindowPrice();
     int addListWindow(Tab * tab);
     Tab * getCurrentWindow();
     void setCurrentWindowIndex(const int newIndex);

@@ -5,6 +5,7 @@
 #include <QJsonObject>
 #include <stdexcept>
 #include <QFile>
+#include <math.h>
 
 GameManager::GameManager() {
 
@@ -12,13 +13,13 @@ GameManager::GameManager() {
 
     items_ = std::vector<Item *>();
 
-    Upgrade * pupgrade0 = new Upgrade(QString("BetterClickUpgrade"),QString("Increase UPC by 1"),1,[](const int currentLevel) { return currentLevel + 1;});
-    Item * pitem0 = new Item(QString("Better click"),QString("Increase the UPC by 1"),1,Item::BonusType::UNITS_PER_CLICK,[](int quantity) { return 2*quantity+1;},pupgrade0);
+    Upgrade * pupgrade0 = new Upgrade(QString("BetterClickUpgrade"),QString("Increase UPC by 1"),1,[](const int currentLevel) { return 100+static_cast<int>(pow(currentLevel,4)*100);});
+    Item * pitem0 = new Item(QString("Better click"),QString("Increase the item UPC by 1"),1,Item::BonusType::UNITS_PER_CLICK,[](int quantity) { return 10+static_cast<int>(pow(quantity,3))*10;},pupgrade0);
 
     items_.push_back(pitem0);
 
-    Upgrade * pupgrade1 = new Upgrade(QString("AutoClickUpgrade"),QString("Increase UPS by 1"),1,[](const int currentLevel){ return currentLevel + 1;});
-    Item * pitem1 = new Item(QString("AutoClick"),QString("Increase the UPS by 1"),1,Item::BonusType::UNITS_PER_SECOND,[](int quantity){return 2*quantity+1;},pupgrade1);
+    Upgrade * pupgrade1 = new Upgrade(QString("AutoClickUpgrade"),QString("Increase UPS by 1"),1,[](const int currentLevel){ return static_cast<int>(pow(currentLevel+100,4));});
+    Item * pitem1 = new Item(QString("AutoClick"),QString("Increase the item UPS by 1"),1,Item::BonusType::UNITS_PER_SECOND,[](int quantity){return static_cast<int>(pow(quantity+10,4));},pupgrade1);
 
     items_.push_back(pitem1);
 
@@ -71,13 +72,13 @@ bool GameManager::BuyTab(const QString & newName){
             return false;
         }
     }
-    int price = pplayer_->getWindowPrice(pplayer_->getNbWindow());
+    int price = pplayer_->getWindowPrice();
     if (price > pplayer_->getScore()){
         qDebug()<<("exception : not enough money to spend");
         return false;
     }
     pplayer_->removeScore(price);
-    pplayer_->setCurrentWindowIndex(pplayer_->addListWindow(new Tab(newName,items_)) - 1);
+    pplayer_->setCurrentWindowIndex(pplayer_->addListWindow(new Tab(newName,items_,static_cast<int>(pow(2,pplayer_->getNbWindow())))) - 1);
     return true;
 }
 
