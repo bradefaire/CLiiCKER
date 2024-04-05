@@ -63,6 +63,7 @@ private:
     void printScore();
     int getPriceBuy(const QString & itemName,int quantity);
     int getPriceUpdate(const QString & itemName,int quantity);
+    void printItem();
     QTimer * ptimer;
 };
 #endif // MAINWINDOW_H

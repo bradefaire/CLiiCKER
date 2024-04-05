@@ -20,10 +20,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     printScore();
 
-    ui->number_10->setText(QString("%1").arg(getPriceBuy(ui->item1->title(),quantityItem1)));
-    ui->number->setText(QString("%1").arg(getPriceBuy(ui->item2->title(),quantityItem2)));
-    ui->number_8->setText(QString("%1").arg(getPriceUpdate(ui->item1->title(),levelUpgrade1)));
-    ui->number_2->setText(QString("%1").arg(getPriceUpdate(ui->item2->title(),levelUpgrade2)));
+    printItem();
 
     ptimer = new QTimer(this);
 
@@ -39,6 +36,30 @@ MainWindow::~MainWindow()
     delete ptimer;
 }
 
+void MainWindow::printItem()
+{
+    QString itemName1 = ui->item1->title();
+    Item * pitem1 = pGameManager_->pplayer_->getCurrentWindow()->getItem(itemName1);
+    int quantity1 = pGameManager_->pplayer_->getCurrentWindow()->getItemQuantity(pitem1);
+    int level1 = pGameManager_->pplayer_->getCurrentWindow()->getUpgradeLevel(pitem1->getUpgrade());
+    qDebug() << level1 << "level1";
+    qDebug() << quantity1 << "quantity1";
+
+    ui->number_10->setText(QString("%1").arg(getPriceBuy(ui->item1->title(),quantity1)));//item
+    ui->number_7->setText(QString("%1").arg(quantity1));
+    ui->number_8->setText(QString("%1").arg(getPriceUpdate(ui->item1->title(),level1)));//upgrade
+    ui->number_9->setText(QString("%1").arg(level1));
+
+    QString itemName2 = ui->item2->title();
+    Item * pitem2 = pGameManager_->pplayer_->getCurrentWindow()->getItem(itemName2);
+    int quantity2 = pGameManager_->pplayer_->getCurrentWindow()->getItemQuantity(pitem2);
+    int level2 = pGameManager_->pplayer_->getCurrentWindow()->getUpgradeLevel(pitem2->getUpgrade());
+
+    ui->number->setText(QString("%1").arg(getPriceBuy(ui->item2->title(),quantity2)));//item
+    ui->number_5->setText(QString("%1").arg(quantity2));
+    ui->number_2->setText(QString("%1").arg(getPriceUpdate(ui->item2->title(),level2)));//upgrade
+    ui->number_6->setText(QString("%1").arg(level2));
+}
 int MainWindow::getPriceBuy(const QString & itemName,int quantity)
 {
     return pGameManager_->pplayer_->getCurrentWindow()->getItem(itemName)->Price(quantity);
@@ -136,32 +157,11 @@ void MainWindow::ButtonPressed(){
     printScore();
     return;
 }
-
 void MainWindow::TabChanged(const int tabIndex){
     qDebug() << "change tab to index"<< tabIndex;
 
     pGameManager_->ChangeTab(tabIndex);
-    QString itemName1 = ui->item1->title();
-    Item * pitem1 = pGameManager_->pplayer_->getCurrentWindow()->getItem(itemName1);
-    int quantity1 = pGameManager_->pplayer_->getCurrentWindow()->getItemQuantity(pitem1);
-    int level1 = pGameManager_->pplayer_->getCurrentWindow()->getUpgradeLevel(pitem1->getUpgrade());
-    qDebug() << level1 << "level1";
-    qDebug() << quantity1 << "quantity1";
-
-    ui->number_10->setText(QString("%1").arg(getPriceBuy(ui->item1->title(),quantity1)));//item
-    ui->number_7->setText(QString("%1").arg(quantity1));
-    ui->number_8->setText(QString("%1").arg(getPriceUpdate(ui->item1->title(),level1)));//upgrade
-    ui->number_9->setText(QString("%1").arg(level1));
-
-    QString itemName2 = ui->item2->title();
-    Item * pitem2 = pGameManager_->pplayer_->getCurrentWindow()->getItem(itemName2);
-    int quantity2 = pGameManager_->pplayer_->getCurrentWindow()->getItemQuantity(pitem2);
-    int level2 = pGameManager_->pplayer_->getCurrentWindow()->getUpgradeLevel(pitem2->getUpgrade());
-
-    ui->number->setText(QString("%1").arg(getPriceBuy(ui->item2->title(),quantity2)));//item
-    ui->number_5->setText(QString("%1").arg(quantity2));
-    ui->number_2->setText(QString("%1").arg(getPriceUpdate(ui->item2->title(),level2)));//upgrade
-    ui->number_6->setText(QString("%1").arg(level2));
+    printItem();
     return;
 }
 
@@ -247,6 +247,8 @@ void MainWindow::on_actionSave_triggered()
                                                     );
     if (fileName != nullptr){
         pGameManager_->SaveGame(fileName);
+        printItem();
+        printScore();
     }
 }
 
@@ -267,6 +269,8 @@ void MainWindow::on_actionOpen_triggered()
                                                     "Text files (*.json)");
     if (fileName != nullptr){
         pGameManager_->LoadGame(fileName);
+        printScore();
+        printItem();
     }
 
 }
@@ -290,6 +294,8 @@ void MainWindow::on_actionCreate_triggered()
     if(ok)
     {
         pGameManager_->NewGame(newName);
+        printItem();
+        printScore();
     }
 
 }
