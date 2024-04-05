@@ -4,6 +4,7 @@
 #include <QInputDialog>
 #include <QFileDialog>
 #include <QMessageBox>
+#include <QFileInfo>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -22,12 +23,27 @@ MainWindow::MainWindow(QWidget *parent)
 
     printItem();
 
+    ui->label_3->setText(QString("%1").arg(pGameManager_->pplayer_->getWindowPrice()));
+
     ptimer = new QTimer(this);
 
     const int interval = 1;
     ptimer->setInterval(interval);
     connect(ptimer,SIGNAL(timeout()),this,SLOT(Update()));
     ptimer->start();
+
+    QMessageBox msgBox;
+    msgBox.setText("Loading Game");
+    msgBox.setInformativeText("Do you want to load an existing game ?");
+    msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+    int ans = msgBox.exec();
+    if (ans == QMessageBox::Yes){
+        on_actionOpen_triggered();
+    }
+    else{
+        on_actionCreate_triggered();
+    }
+
 }
 
 MainWindow::~MainWindow()
@@ -60,6 +76,7 @@ void MainWindow::printItem()
     ui->number_2->setText(QString("%1").arg(getPriceUpdate(ui->item2->title(),level2)));//upgrade
     ui->number_6->setText(QString("%1").arg(level2));
 }
+
 int MainWindow::getPriceBuy(const QString & itemName,int quantity)
 {
     return pGameManager_->pplayer_->getCurrentWindow()->getItem(itemName)->Price(quantity);
@@ -142,21 +159,23 @@ void MainWindow::BuyTab(){
         ui->tabWidget->setCurrentIndex(newIndex);
         TabChanged(newIndex);
 
-        int newPrice = pGameManager_->pplayer_->getWindowPrice(pGameManager_->pplayer_->getNbWindow());
+        int newPrice = pGameManager_->pplayer_->getWindowPrice();
         ui->label_3->setText(QString("%1").arg(newPrice));
     }
-    else qDebug()<<"ce nom de tab existe déjà";
+    else qDebug()<<"Achat impossible";
 }
 
 void MainWindow::printScore(){
     QString message = QString("%1").arg(pGameManager_->getScore());
     ui->label_11->setText(message);
 }
+
 void MainWindow::ButtonPressed(){
     pGameManager_->ButtonPressed();
     printScore();
     return;
 }
+
 void MainWindow::TabChanged(const int tabIndex){
     qDebug() << "change tab to index"<< tabIndex;
 
@@ -240,12 +259,18 @@ void MainWindow::Update(){
 
 void MainWindow::on_actionSave_triggered()
 {
+    QString playerName = pGameManager_->pplayer_->getName();
+    bool noName = (playerName.isNull() || playerName.isEmpty());
     QString fileName = QFileDialog::getSaveFileName(this,
-                                                    tr("Sauvegarder le fichier"),
-                                                    pGameManager_->pplayer_->getName(),
+                                                    tr("Save File"),
+                                                    noName ? "New Game" : playerName,
                                                     tr("Text files (*.json")
                                                     );
     if (fileName != nullptr){
+        if (noName){
+            QFileInfo fi(fileName);
+            pGameManager_->pplayer_->setName( fi.baseName() );
+        }
         pGameManager_->SaveGame(fileName);
         printItem();
         printScore();
@@ -255,16 +280,19 @@ void MainWindow::on_actionSave_triggered()
 
 void MainWindow::on_actionOpen_triggered()
 {
-    QMessageBox msgBox;
-    msgBox.setText("All unsaved data will be lost");
-    msgBox.setInformativeText("Are you sure you want to open a new file ?");
-    msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::Cancel);
-    int ans = msgBox.exec();
-    if (ans == QMessageBox::Cancel){
-        return;
+    QString playerName = pGameManager_->pplayer_->getName();
+    if (! (playerName.isNull())){
+        QMessageBox msgBox;
+        msgBox.setText("All unsaved data will be lost");
+        msgBox.setInformativeText("Are you sure you want to open a new file ?");
+        msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::Cancel);
+        int ans = msgBox.exec();
+        if (ans == QMessageBox::Cancel){
+            return;
+        }
     }
     QString fileName = QFileDialog::getOpenFileName(this,
-                                                    tr("Ouvrir un fichier"),
+                                                    tr("Open File"),
                                                     "",
                                                     "Text files (*.json)");
     if (fileName != nullptr){
@@ -290,12 +318,24 @@ void MainWindow::on_actionCreate_triggered()
         }
     }
     bool ok;
-    QString newName = QInputDialog::getText(this, "Nom du Joueur", "Entrez le nom de votre partie :", QLineEdit::Normal, "", &ok);
+    QString newName = QInputDialog::getText(this, "Player Name", "Please, enter your new game name :", QLineEdit::Normal, "", &ok);
     if(ok)
     {
+        if (newName.isEmpty() || newName.isNull()){
+            newName = "New Game";
+        }
         pGameManager_->NewGame(newName);
         printItem();
         printScore();
     }
 }
 
+void MainWindow::closeEvent(QCloseEvent *event)
+{
+    event->ignore();
+    if (QMessageBox::Yes == QMessageBox::question(this, "All unsaved data will be lost", "Are you sure you want to Quit?", QMessageBox::Yes | QMessageBox::No))
+    {
+        event->accept();
+    }
+
+}

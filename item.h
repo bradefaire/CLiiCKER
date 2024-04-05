@@ -22,10 +22,8 @@ public:
 private:
     QString name_; /**< Name of the item. */
     QString description_; /**< Description of the item. */
-    bool unlocked_; /**< Flag indicating if the item is unlocked. */
     int bonus_; /**< Bonus provided by the item. */
     BonusType type_; /**< Type of bonus provided by the item. */
-    int quantity_; /**< Quantity of the item. */
     std::function<int(const int)> priceFunction_; /**< Function to calculate the price of the item. */
     Upgrade * pupgrade_; /**< Pointer to the associated upgrade. */
 
@@ -43,12 +41,6 @@ public:
     QString & getDescription();
 
     /**
-     * @brief Checks if the item is unlocked.
-     * @return True if the item is unlocked, false otherwise.
-     */
-    bool isUnlocked() const;
-
-    /**
      * @brief Gets the bonus provided by the item.
      * @return The bonus provided by the item.
      */
@@ -59,14 +51,7 @@ public:
      * @return The type of bonus provided by the item.
      */
     BonusType getType() const;
-
-    /**
-     * @brief Gets the quantity of the item.
-     * @return The quantity of the item.
-     */
-    int getQuantity() const;
-
-    /**
+    /*
      * @brief Calculates the price of the item.
      * @param quantity The quantity of the item.
      * @return The price of the item.
@@ -78,23 +63,6 @@ public:
      * @return Pointer to the associated upgrade.
      */
     Upgrade * getUpgrade();
-
-    /**
-     * @brief Unlocks the item.
-     */
-    void Unlock();
-
-    /**
-     * @brief Adds quantity to the item.
-     * @param quantity The quantity to add.
-     */
-    void AddQuantity(int = 1);
-
-    /**
-     * @brief Removes quantity from the item.
-     * @param quantity The quantity to remove.
-     */
-    void RemoveQuantity(int = 1);
 
     /**
      * @brief Constructor for the Item class.

@@ -102,14 +102,14 @@ public:
      * @param UPS The units per second of the tab.
      * @param UPC The units per click of the tab.
      */
-    Tab(const QString & name, int UPS, int UPC);
+    Tab(const QString & name, const int UPS, const int UPC);
 
     /**
      * @brief Constructor for the Tab class with initial items.
      * @param name The name of the tab.
      * @param items Vector of pointers to initial items in the tab.
      */
-    Tab(const QString & name, std::vector<Item *> items);
+    Tab(const QString & name, std::vector<Item *> items,const int UPC=1);
 
     /**
      * @brief Destructor for the Tab class.

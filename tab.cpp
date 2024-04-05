@@ -1,9 +1,8 @@
 #include "tab.h"
 
 #include <stdexcept>
-#include <QDebug>
 
-Tab::Tab(const QString & name, int UPS, int UPC) {
+Tab::Tab(const QString & name, const int UPS, const int UPC) {
 
     name_ = name;
     unitsPerSecond_ = UPS;
@@ -11,10 +10,10 @@ Tab::Tab(const QString & name, int UPS, int UPC) {
 
 }
 
-Tab::Tab(const QString & name, std::vector<Item *> items){
+Tab::Tab(const QString & name, std::vector<Item *> items, const int UPC){
     name_ = name;
     unitsPerSecond_ = 0;
-    unitsPerClick_ = 1;
+    unitsPerClick_ = UPC;
     for (Item * pitem : items){
         this->AddItem(pitem,0);
     }
@@ -42,7 +41,6 @@ int Tab::AddItem(Item * pitem, const int amount){
         quantity = amount;
         AddUpgrade(pitem->getUpgrade(),0);
     }
-    pitem->AddQuantity(amount);
     Upgrade * pupgrade = pitem->getUpgrade();
     int bonus = (pitem->getBonus() + upgrades_.at(pupgrade) * pupgrade->getBonus()) * amount;
     if (pitem->getType() == Item::BonusType::UNITS_PER_CLICK){

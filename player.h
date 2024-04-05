@@ -4,7 +4,6 @@
 #include <QString>
 #include <vector>
 
-#include "stats.h"
 #include "tab.h"
 
 /**
@@ -53,7 +52,6 @@ private:
     int nbWindow; /**< Number of windows of the player. */
     std::vector<Tab *> listWindow; /**< List of windows owned by the player. */
     int currentWindowIndex; /**< Index of the current window. */
-    Stats statPlayer; /**< Stats of the player. */
 
 public:
     /**
