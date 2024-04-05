@@ -4,7 +4,6 @@
 #include <QString>
 #include <vector>
 
-#include "stats.h"
 #include "tab.h"
 
 class Player
@@ -26,7 +25,6 @@ private:
     int nbWindow;
     std::vector<Tab *> listWindow;
     int currentWindowIndex;
-    Stats statPlayer;
 public :
     void addScore(const int score);
     void removeScore(const int score);
