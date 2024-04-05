@@ -1,0 +1,20 @@
+{
+    "UPS": 0,
+    "name": "",
+    "score": 4,
+    "tabs": [
+        {
+            "items": {
+                "AutoClick": {
+                    "quantity": 0,
+                    "upgradeLevel": 0
+                },
+                "Better click": {
+                    "quantity": 6,
+                    "upgradeLevel": 0
+                }
+            },
+            "name": "Tab 1"
+        }
+    ]
+}
