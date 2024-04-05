@@ -20,6 +20,7 @@ public slots:
 
 public:
     GameManager();
+    ~GameManager();
     bool BuyItem(const QString & itemName);
     bool BuyUpgrade(const QString & upgradeName);
     bool BuyTab(const QString & newName);

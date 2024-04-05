@@ -30,6 +30,16 @@ GameManager::GameManager() {
 
 }
 
+GameManager::~GameManager(){
+    delete pplayer_;
+    for (Item * pitem : items_){
+        delete pitem;
+    }
+    for (Upgrade * pupgrade : upgrades_){
+        delete pupgrade;
+    }
+}
+
 bool GameManager::BuyItem(const QString & itemName){
     Tab * currentWindow = pplayer_->getCurrentWindow();
     Item * pitem = currentWindow->getItem(itemName);

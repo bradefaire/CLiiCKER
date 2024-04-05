@@ -37,6 +37,7 @@ MainWindow::~MainWindow()
 {
     delete ui;
     delete ptimer;
+    delete pGameManager_;
 }
 
 int MainWindow::getPriceBuy(const QString & itemName,int quantity)

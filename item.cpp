@@ -13,6 +13,10 @@ Item::Item(const QString & name, const QString & description, const int bonus, c
     unlocked_ = false;
 }
 
+Item::~Item(){
+    delete pupgrade_;
+}
+
 int Item::getBonus() const{
     return bonus_;
 }

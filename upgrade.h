@@ -24,6 +24,7 @@ public:
     void operator=(const Upgrade &);
 
     Upgrade(const QString &, const QString &, const int, const std::function<int(const int)>);
+    ~Upgrade() = default;
 };
 
 #endif // UPGRADE_H
