@@ -54,8 +54,6 @@ void Player::addScore(const int addedScore){
 }
 
 void Player::removeScore(const int removedScore){
-    qDebug()<<score;
-        qDebug()<<removedScore;
     if (score < removedScore){
         throw new std::invalid_argument("the removed score should be lower than the current one");
     }
@@ -65,7 +63,7 @@ void Player::removeScore(const int removedScore){
 
 
     score -= removedScore;
-    if (score < 0) score = 0;
+    if (score < 0) score = 0;//Should never happen
 }
 
 int Player::getScore(){

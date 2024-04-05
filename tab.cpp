@@ -1,7 +1,6 @@
 #include "tab.h"
 
 #include <stdexcept>
-#include <QDebug>
 
 Tab::Tab(const QString & name, const int UPS, const int UPC) {
 
@@ -42,7 +41,6 @@ int Tab::AddItem(Item * pitem, const int amount){
         quantity = amount;
         AddUpgrade(pitem->getUpgrade(),0);
     }
-    pitem->AddQuantity(amount);
     Upgrade * pupgrade = pitem->getUpgrade();
     int bonus = (pitem->getBonus() + upgrades_.at(pupgrade) * pupgrade->getBonus()) * amount;
     if (pitem->getType() == Item::BonusType::UNITS_PER_CLICK){

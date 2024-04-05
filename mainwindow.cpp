@@ -163,7 +163,7 @@ void MainWindow::BuyTab(){
         int newPrice = pGameManager_->pplayer_->getWindowPrice();
         ui->label_3->setText(QString("%1").arg(newPrice));
     }
-    else qDebug()<<"ce nom de tab existe déjà";
+    else qDebug()<<"Achat impossible";
 }
 
 void MainWindow::printScore(){
