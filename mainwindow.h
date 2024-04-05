@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QTimer>
+#include <QCloseEvent>
 
 #include "gamemanager.h"
 
@@ -55,6 +56,8 @@ private slots:
 private:
     Ui::MainWindow *ui;
     GameManager *pGameManager_;
+    QTimer * ptimer;
+
     int scoreTest;
     int quantityItem1;
     int levelUpgrade1;
@@ -64,6 +67,6 @@ private:
     int getPriceBuy(const QString & itemName,int quantity);
     int getPriceUpdate(const QString & itemName,int quantity);
     void printItem();
-    QTimer * ptimer;
+    void closeEvent(QCloseEvent *event);
 };
 #endif // MAINWINDOW_H
