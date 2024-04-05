@@ -29,7 +29,7 @@ public:
 
     void SaveGame(const QString & filename);
     void LoadGame(const QString & filename);
-    void NewGame(const QString &);
+    void NewGame(const QString & playerName);
     int getScore();
 };
 
