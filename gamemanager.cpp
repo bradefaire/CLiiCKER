@@ -18,8 +18,8 @@ GameManager::GameManager() {
 
     items_.push_back(pitem0);
 
-    Upgrade * pupgrade1 = new Upgrade(QString("AutoClickUpgrade"),QString("Increase UPS by 1"),1,[](const int currentLevel){ return static_cast<int>(pow(currentLevel+100,4));});
-    Item * pitem1 = new Item(QString("AutoClick"),QString("Increase the item UPS by 1"),1,Item::BonusType::UNITS_PER_SECOND,[](int quantity){return static_cast<int>(pow(quantity+10,4));},pupgrade1);
+    Upgrade * pupgrade1 = new Upgrade(QString("AutoClickUpgrade"),QString("Increase UPS by 1"),1,[](const int currentLevel){ return static_cast<int>(pow(currentLevel+2,6));});
+    Item * pitem1 = new Item(QString("AutoClick"),QString("Increase the item UPS by 1"),1,Item::BonusType::UNITS_PER_SECOND,[](int quantity){return static_cast<int>(pow(quantity+2,5));},pupgrade1);
 
     items_.push_back(pitem1);
 
