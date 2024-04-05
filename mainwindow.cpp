@@ -11,10 +11,10 @@ MainWindow::MainWindow(QWidget *parent)
     scoreTest = 0;
     pGameManager_ = new GameManager();
 
-    quantityItem1 = 1;
-    levelUpgrade1 = 1;
-    quantityItem2 = 1;
-    levelUpgrade2 = 1;
+    quantityItem1 = 0;
+    levelUpgrade1 = 0;
+    quantityItem2 = 0;
+    levelUpgrade2 = 0;
 
     printScore();
 
@@ -116,8 +116,11 @@ void MainWindow::BuyTab(){
         }
 
         int newIndex = ui->tabWidget->indexOf(newWidget);
-
+        ui->tabWidget->setCurrentIndex(newIndex);
         TabChanged(newIndex);
+
+        int newPrice = pGameManager_->pplayer_->getWindowPrice(pGameManager_->pplayer_->getNbWindow());
+        ui->label_3->setText(QString("%1").arg(newPrice));
     }
     else qDebug()<<"ce nom de tab existe déjà";
 }
@@ -133,12 +136,15 @@ void MainWindow::ButtonPressed(){
 }
 
 void MainWindow::TabChanged(const int tabIndex){
-    ui->tabWidget->setCurrentIndex(tabIndex);
+    qDebug() << "change tab to index"<< tabIndex;
 
+    pGameManager_->ChangeTab(tabIndex);
     QString itemName1 = ui->item1->title();
     Item * pitem1 = pGameManager_->pplayer_->getCurrentWindow()->getItem(itemName1);
     int quantity1 = pGameManager_->pplayer_->getCurrentWindow()->getItemQuantity(pitem1);
     int level1 = pGameManager_->pplayer_->getCurrentWindow()->getUpgradeLevel(pitem1->getUpgrade());
+    qDebug() << level1 << "level1";
+    qDebug() << quantity1 << "quantity1";
 
     ui->number_10->setText(QString("%1").arg(getPriceBuy(ui->item1->title(),quantity1)));//item
     ui->number_7->setText(QString("%1").arg(quantity1));
@@ -165,7 +171,8 @@ void MainWindow::on_pushButton_6_clicked()
 
 void MainWindow::on_tabWidget_currentChanged(int index)
 {
-    TabChanged(ui->tabWidget->currentIndex());
+    qDebug() << "index current tab "<< index;
+    TabChanged(index);
 }
 
 void MainWindow::on_pushButton_clicked()
@@ -229,9 +236,3 @@ void MainWindow::Update(){
     pGameManager_->Update(ptimer->interval());
     printScore();
 }
-
-void MainWindow::on_tabWidget_tabBarClicked(int index)
-{
-
-}
-

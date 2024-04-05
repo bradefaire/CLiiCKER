@@ -354,6 +354,11 @@ color: rgb(0, 0, 0);</string>
           <height>71</height>
          </rect>
         </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(255, 255, 255);
+selection-background-color: rgb(170, 0, 0);
+color: rgb(0, 0, 0);</string>
+        </property>
         <property name="text">
          <string>Push Me</string>
         </property>
@@ -369,7 +374,7 @@ color: rgb(0, 0, 0);</string>
      <x>0</x>
      <y>0</y>
      <width>875</width>
-     <height>22</height>
+     <height>25</height>
     </rect>
    </property>
    <property name="nativeMenuBar">
