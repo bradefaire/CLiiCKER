@@ -34,6 +34,7 @@ MainWindow::~MainWindow()
 {
     delete ui;
     delete ptimer;
+    delete pGameManager_;
 }
 
 void MainWindow::printItem()

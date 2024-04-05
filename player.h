@@ -18,6 +18,7 @@ public:
            int _unitPerSecond,
            int _nbWindow ,
            std::vector<Tab *> _ListWindow);
+    ~Player();
 private:
     QString name;
     int score;

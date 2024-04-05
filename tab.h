@@ -34,6 +34,7 @@ public:
 
     Tab(const QString & name, int UPS, int UPC);
     Tab(const QString & name, std::vector<Item *> items);
+    ~Tab() = default;
 };
 
 #endif // TAB_H

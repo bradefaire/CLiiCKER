@@ -36,6 +36,7 @@ public:
     void RemoveQuantity(int = 1);
 
     Item(const QString &, const QString &, const int, const BonusType,const std::function<int(const int)>,Upgrade * pupgrade);
+    ~Item();
 };
 
 #endif // ITEM_H
