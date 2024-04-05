@@ -128,8 +128,8 @@ void MainWindow::BuyTab(){
 }
 
 void MainWindow::printScore(){
-    QString message = QString("score = %1").arg(pGameManager_->getScore());
-    ui->statusbar->showMessage(message);
+    QString message = QString("%1").arg(pGameManager_->getScore());
+    ui->label_11->setText(message);
 }
 void MainWindow::ButtonPressed(){
     pGameManager_->ButtonPressed();
