@@ -34,7 +34,6 @@ MainWindow::~MainWindow()
 {
     delete ui;
     delete ptimer;
-    delete pGameManager_;
 }
 
 void MainWindow::printItem()
@@ -298,6 +297,5 @@ void MainWindow::on_actionCreate_triggered()
         printItem();
         printScore();
     }
-
 }
 
