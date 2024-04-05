@@ -23,7 +23,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     printItem();
 
-    ui->label_3->setText(QString("%1").arg(pGameManager_->pplayer_->getWindowPrice()));
+    ui->label_3->setText(QString("%1").arg(pGameManager_->pplayer_->getWindowPrice(pGameManager_->pplayer_->getNbWindow())));
 
     ptimer = new QTimer(this);
 
@@ -159,7 +159,7 @@ void MainWindow::BuyTab(){
         ui->tabWidget->setCurrentIndex(newIndex);
         TabChanged(newIndex);
 
-        int newPrice = pGameManager_->pplayer_->getWindowPrice();
+        int newPrice = pGameManager_->pplayer_->getWindowPrice(pGameManager_->pplayer_->getNbWindow());
         ui->label_3->setText(QString("%1").arg(newPrice));
     }
     else qDebug()<<"Achat impossible";

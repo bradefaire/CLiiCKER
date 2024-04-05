@@ -72,7 +72,7 @@ bool GameManager::BuyTab(const QString & newName){
             return false;
         }
     }
-    int price = pplayer_->getWindowPrice();
+    int price = pplayer_->getWindowPrice(pplayer_->getNbWindow());
     if (price > pplayer_->getScore()){
         qDebug()<<("exception : not enough money to spend");
         return false;

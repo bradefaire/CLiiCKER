@@ -86,7 +86,7 @@ public slots:
      */
     void Update(const int deltaTime);
 
-private:
+public:
     std::vector<Upgrade *> upgrades_; /**< Vector of pointers to upgrades. */
     std::vector<Item *> items_; /**< Vector of pointers to items. */
     Player * pplayer_; /**< Pointer to the player object. */

@@ -81,7 +81,7 @@ void Player::addUnitsPerSecond(const int addedScore){
     unitPerSecond += addedScore;
 }
 
-int Player::getWindowPrice(){
+int Player::getWindowPrice(int nbWindow){
     return static_cast<int>(1000 + 100*pow(nbWindow,3));
 }
 
