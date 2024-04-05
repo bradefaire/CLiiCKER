@@ -254,8 +254,8 @@ void MainWindow::on_actionSave_triggered()
 void MainWindow::on_actionOpen_triggered()
 {
     QMessageBox msgBox;
-    msgBox.setText("All unsave data will be lost");
-    msgBox.setInformativeText("Are you sure you want to create a new file ?");
+    msgBox.setText("All unsaved data will be lost");
+    msgBox.setInformativeText("Are you sure you want to open a new file ?");
     msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::Cancel);
     int ans = msgBox.exec();
     if (ans == QMessageBox::Cancel){
@@ -277,7 +277,7 @@ void MainWindow::on_actionCreate_triggered()
     QString playerName = pGameManager_->pplayer_->getName();
     if (! (playerName.isNull())){
         QMessageBox msgBox;
-        msgBox.setText("All unsave data will be lost");
+        msgBox.setText("All unsaved data will be lost");
         msgBox.setInformativeText("Are you sure you want to create a new file ?");
         msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::Cancel);
         int ans = msgBox.exec();
