@@ -81,8 +81,6 @@ int Tab::AddUpgrade(Upgrade * pupgrade, const int amount){
 
     upgrades_[pupgrade] = level;
 
-    qDebug() << " upgrade added : " << amount;
-
     return addedUPS;
 }
 

@@ -3,6 +3,7 @@
 
 #include <QInputDialog>
 #include <QFileDialog>
+#include <QMessageBox>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -239,12 +240,27 @@ void MainWindow::Update(){
 
 void MainWindow::on_actionSave_triggered()
 {
-    pGameManager_->SaveGame(pGameManager_->pplayer_->getName());
+    QString fileName = QFileDialog::getSaveFileName(this,
+                                                    tr("Sauvegarder le fichier"),
+                                                    pGameManager_->pplayer_->getName(),
+                                                    tr("Text files (*.json")
+                                                    );
+    if (fileName != nullptr){
+        pGameManager_->SaveGame(fileName);
+    }
 }
 
 
 void MainWindow::on_actionOpen_triggered()
 {
+    QMessageBox msgBox;
+    msgBox.setText("All unsave data will be lost");
+    msgBox.setInformativeText("Are you sure you want to create a new file ?");
+    msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::Cancel);
+    int ans = msgBox.exec();
+    if (ans == QMessageBox::Cancel){
+        return;
+    }
     QString fileName = QFileDialog::getOpenFileName(this,
                                                     tr("Ouvrir un fichier"),
                                                     "",
@@ -258,12 +274,22 @@ void MainWindow::on_actionOpen_triggered()
 
 void MainWindow::on_actionCreate_triggered()
 {
-    pGameManager_->SaveGame(pGameManager_->pplayer_->getName());
+    QString playerName = pGameManager_->pplayer_->getName();
+    if (! (playerName.isNull())){
+        QMessageBox msgBox;
+        msgBox.setText("All unsave data will be lost");
+        msgBox.setInformativeText("Are you sure you want to create a new file ?");
+        msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::Cancel);
+        int ans = msgBox.exec();
+        if (ans == QMessageBox::Cancel){
+            return;
+        }
+    }
     bool ok;
-    QString fileName = QInputDialog::getText(this, "Nom du fichier", "Entrez un nom pour la nouvelle game :", QLineEdit::Normal, "", &ok);
+    QString newName = QInputDialog::getText(this, "Nom du Joueur", "Entrez le nom de votre partie :", QLineEdit::Normal, "", &ok);
     if(ok)
     {
-        pGameManager_->NewGame(fileName);
+        pGameManager_->NewGame(newName);
     }
 
 }

@@ -11,7 +11,8 @@ class Player
 {
 public:
     Player();
-    Player(QString Name);
+    Player(const QString & Name);
+    Player(const QString & Name,Tab * pBaseTab);
     Player(QString Name, //Value
            int _score,
            int _unitPerSecond,

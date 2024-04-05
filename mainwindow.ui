@@ -374,7 +374,7 @@ color: rgb(0, 0, 0);</string>
      <x>0</x>
      <y>0</y>
      <width>875</width>
-     <height>25</height>
+     <height>17</height>
     </rect>
    </property>
    <property name="nativeMenuBar">
@@ -403,10 +403,16 @@ color: rgb(0, 0, 0);</string>
    <property name="text">
     <string>Open</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+O</string>
+   </property>
   </action>
   <action name="actionCreate">
    <property name="text">
     <string>New game</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+N</string>
    </property>
   </action>
  </widget>

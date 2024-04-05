@@ -12,12 +12,12 @@ GameManager::GameManager() {
 
     items_ = std::vector<Item *>();
 
-    Upgrade * pupgrade0 = new Upgrade(QString("U0"),QString("Increase UPC by 1"),1,[](const int currentLevel) { return currentLevel + 1;});
+    Upgrade * pupgrade0 = new Upgrade(QString("BetterClickUpgrade"),QString("Increase UPC by 1"),1,[](const int currentLevel) { return currentLevel + 1;});
     Item * pitem0 = new Item(QString("Better click"),QString("Increase the UPC by 1"),1,Item::BonusType::UNITS_PER_CLICK,[](int quantity) { return 2*quantity+1;},pupgrade0);
 
     items_.push_back(pitem0);
 
-    Upgrade * pupgrade1 = new Upgrade(QString("U1"),QString("Increase UPS by 1"),1,[](const int currentLevel){ return currentLevel + 1;});
+    Upgrade * pupgrade1 = new Upgrade(QString("AutoClickUpgrade"),QString("Increase UPS by 1"),1,[](const int currentLevel){ return currentLevel + 1;});
     Item * pitem1 = new Item(QString("AutoClick"),QString("Increase the UPS by 1"),1,Item::BonusType::UNITS_PER_SECOND,[](int quantity){return 2*quantity+1;},pupgrade1);
 
     items_.push_back(pitem1);
@@ -94,16 +94,14 @@ void GameManager::SaveGame(const QString & filename){
     for (Tab * ptab : pplayer_->getWindows()){
         QJsonObject tabObject;
         QJsonObject itemsObject;
-        QJsonObject upgradesObject;
         for (const auto& [pitem,quantity] : ptab->getItems() ){
-            itemsObject.insert(pitem->getName(),quantity);
-        }
-        for (const auto& [pupgrade,level] : ptab->getUpgrades() ){
-            upgradesObject.insert(pupgrade->getName(),level);
+            QJsonObject currentItemObject;
+            currentItemObject.insert("quantity",quantity);
+            currentItemObject.insert("upgradeLevel",ptab->getUpgradeLevel(pitem->getUpgrade()));
+            itemsObject.insert(pitem->getName(),currentItemObject);
         }
         tabObject.insert("name",ptab->getName());
         tabObject.insert("items",itemsObject);
-        tabObject.insert("upgrades",upgradesObject);
         tabsArray.append(tabObject);
     }
     mainObject.insert("tabs",tabsArray);
@@ -140,12 +138,11 @@ void GameManager::LoadGame(const QString & filename){
         QJsonObject tabObject = tabsArray[i].toObject();
         Tab * tab = new Tab(tabObject.value("name").toString(),items_);
         QJsonObject itemsObject = tabObject.value("items").toObject();
-        QJsonObject upgradesObject = tabObject.value("upgrades").toObject();
         for (const QString& itemName : itemsObject.keys() ){
-            tab->AddItem(tab->getItem(itemName),itemsObject.value(itemName).toInt());
-        }
-        for (const QString& upgradeName : upgradesObject.keys() ){
-            tab->AddUpgrade(tab->getUpgrade(upgradeName),upgradesObject.value(upgradeName).toInt());
+            QJsonObject currentItemObject = itemsObject.value(itemName).toObject();
+            Item * pitem = tab->getItem(itemName);
+            tab->AddItem(pitem,currentItemObject.value("quantity").toInt());
+            tab->AddUpgrade(pitem->getUpgrade(),currentItemObject.value("upgradeLevel").toInt());
         }
         tabs.push_back(tab);
     }
@@ -155,7 +152,7 @@ void GameManager::LoadGame(const QString & filename){
 }
 
 void GameManager::NewGame(const QString & name){
-    pplayer_ = new Player(name);
+    pplayer_ = new Player(name,new Tab("Tab 1",items_));
 }
 
 int GameManager::getScore()

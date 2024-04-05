@@ -3,7 +3,6 @@
 #include <stdexcept>
 
 Player::Player() {
-    name = "New Game";
     score = 0;
     unitPerSecond = 0;
     nbWindow = 0;
@@ -11,13 +10,23 @@ Player::Player() {
     listWindow = std::vector<Tab *>();
 }
 
-Player::Player(QString Name) {
+Player::Player(const QString & Name) {
     name = Name;
     score = 0;
     unitPerSecond = 0;
     nbWindow = 0;
     currentWindowIndex = 0;
     listWindow = std::vector<Tab *>();
+}
+
+Player::Player(const QString & Name,Tab * pBaseTab){
+    name = Name;
+    score = 0;
+    unitPerSecond = 0;
+    nbWindow = 1;
+    currentWindowIndex = 0;
+    listWindow = std::vector<Tab *>();
+    listWindow.push_back(pBaseTab);
 }
 
 Player::Player(QString Name, int _score, int _unitPerSecond, int _nbWindow, std::vector<Tab *> _ListWindow)
